@@ -1,0 +1,106 @@
+{
+  "Cleaning": [
+    {
+      "name": "Tank Cleaning",
+      "description": "Revitalize your water storage with our thorough tank cleaning services.",
+      "price": "1500",
+      "image": "https://firebasestorage.googleapis.com/v0/b/shop-a6a23.appspot.com/o/cleaning%2Fcleaning1.jpg?alt=media&token=342822d6-a483-426f-aa19-831c91c32481"
+    },
+    {
+      "name": "Glass Cleaning",
+      "description": "Experience clarity with our exacting glass cleaning service.",
+      "price": "1000",
+      "image": "https://firebasestorage.googleapis.com/v0/b/shop-a6a23.appspot.com/o/cleaning%2Fcleaning1.jpg?alt=media&token=342822d6-a483-426f-aa19-831c91c32481"
+    },
+    {
+      "name": "Home Cleaning",
+      "description": "Elevate your living space with our professional home cleaning services.",
+      "price": "500",
+      "image": "https://firebasestorage.googleapis.com/v0/b/shop-a6a23.appspot.com/o/cleaning%2Fcleaning3.png?alt=media&token=f5e73e35-6871-4f70-9ce6-ced8a59b535a"
+    },
+    {
+      "name": "Pest Control",
+      "description": "Safeguard your space with our effective pest cleaning services.",
+      "price": "800",
+      "image": "https://firebasestorage.googleapis.com/v0/b/shop-a6a23.appspot.com/o/cleaning%2Fcleaning4.png?alt=media&token=1ac667b5-9e6e-4140-b54d-74aaaef016c1"
+    }
+  ],
+  "Plumbing": [
+    {
+      "name": "Taps Fitting",
+      "description": "Transform your space with our premium tap fittings.",
+      "price": "800",
+      "image": "https://firebasestorage.googleapis.com/v0/b/shop-a6a23.appspot.com/o/plumbing%2Fplumbing1.jpg?alt=media&token=71c3c469-5e10-47ba-b63b-81bdf52738f9"
+    },
+    {
+      "name": "Bathroom Fitting",
+      "description": "Elevate your bathroom's style and functionality with our premium fittings.",
+      "price": "800",
+      "image": "https://firebasestorage.googleapis.com/v0/b/shop-a6a23.appspot.com/o/plumbing%2Fplumbing2.jpg?alt=media&token=4a7ba05c-dff5-42de-959e-47fd6bfc0275"
+    },
+    {
+      "name": "Basin & sinks",
+      "description": "Discover elegance and functionality with our exquisite basin and sink selections.",
+      "price": "800",
+      "image": "https://firebasestorage.googleapis.com/v0/b/shop-a6a23.appspot.com/o/plumbing%2Fplumbing3.webp?alt=media&token=b4f73874-0366-49da-affc-b1f638dd440c"
+    },
+    {
+      "name": "Motor",
+      "description": "Experience powerful performance with our reliable water motor solutions.",
+      "price": "800",
+      "image": "https://firebasestorage.googleapis.com/v0/b/shop-a6a23.appspot.com/o/plumbing%2Fplumbing4.jpg?alt=media&token=6eb4f439-802b-497a-b0f7-528b7a062494"
+    }
+  ],
+  "Electrician": [
+    {
+      "name": "Light",
+      "description": "Illuminate your space with our versatile and energy-efficient lighting options.",
+      "price": "100",
+      "image": "https://firebasestorage.googleapis.com/v0/b/shop-a6a23.appspot.com/o/electrician%2Felectrician1.jpg?alt=media&token=d20ae48e-920d-46fa-8def-30c2bc4a1783"
+    },
+    {
+      "name": "Fan & AC",
+      "description": "Stay cool and comfortable with our reliable fan and AC solutions.",
+      "price": "300",
+      "image": "https://firebasestorage.googleapis.com/v0/b/shop-a6a23.appspot.com/o/electrician%2Felectrician2.jpg?alt=media&token=96e731a9-aad6-4abe-adcc-0e2189938bcb"
+    },
+    {
+      "name": "Switch & Socket",
+      "description": "Empower your space with our reliable and versatile switch and socket solutions.",
+      "price": "200",
+      "image": "https://firebasestorage.googleapis.com/v0/b/shop-a6a23.appspot.com/o/electrician%2Felectrician3.jpg?alt=media&token=a79eb0cf-1672-4671-a66f-cd1d888d4253"
+    },
+    {
+      "name": "Wiring",
+      "description": "Ensure seamless connectivity with our professional wiring services.",
+      "price": "500",
+      "image": "https://firebasestorage.googleapis.com/v0/b/shop-a6a23.appspot.com/o/electrician%2Felectrician4.jpg?alt=media&token=445057d6-f2a4-48eb-8b13-f49466ffb6d5"
+    }
+  ],
+  "Flooring": [
+    {
+      "name": "Marble",
+      "description": "Transform your space with the timeless elegance of marble.",
+      "price": "800",
+      "image": "https://firebasestorage.googleapis.com/v0/b/shop-a6a23.appspot.com/o/flooring%2Fflooring1.jpg?alt=media&token=6826b2f6-272c-4209-b470-4759f8e4d027"
+    },
+    {
+      "name": "Carpet",
+      "description": "Experience unparalleled comfort and warmth with our premium carpet selections.",
+      "price": "300",
+      "image": "https://firebasestorage.googleapis.com/v0/b/shop-a6a23.appspot.com/o/flooring%2Fflooring2.jpg?alt=media&token=18e77a25-9670-413e-9572-44eef3d8fde0"
+    },
+    {
+      "name": "Parqueting",
+      "description": "Enhance your space with the timeless beauty of parquet flooring.",
+      "price": "1000",
+      "image": "https://firebasestorage.googleapis.com/v0/b/shop-a6a23.appspot.com/o/flooring%2Fflooring3.png?alt=media&token=9eba2856-2d90-4a90-81a5-9cd6088d61f6"
+    },
+    {
+      "name": "Tile",
+      "description": "Revitalize your space with the versatility and durability of tile flooring.",
+      "price": "800",
+      "image": "https://firebasestorage.googleapis.com/v0/b/shop-a6a23.appspot.com/o/flooring%2Fflooring4.jpg?alt=media&token=f95038eb-d6e7-456c-9dde-eabe12cd4d44"
+    }
+  ]
+}
