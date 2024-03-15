@@ -1,5 +1,8 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
+import { useSignOutMutation } from "../hooks/useAuth";
+import { useCallback } from "react";
+import { useSnackbar } from "notistack";
 
 export default function Navbar() {
   const paths = [
@@ -21,6 +24,39 @@ export default function Navbar() {
     },
   ];
   const { user, isLoggedIn } = useAuthContext();
+  const { dispatch } = useAuthContext();
+
+  const navigate = useNavigate();
+
+  const { enqueueSnackbar } = useSnackbar();
+
+  const onSuccess = useCallback(
+    (data) => {
+      if (data.status === 201) {
+        dispatch({ type: "LOGOUT" });
+
+        navigate("/");
+      }
+    },
+    [navigate, dispatch]
+  );
+  const onError = useCallback(
+    (data) => {
+      if (data?.response?.status === 400) {
+        if (Array.isArray(data?.response?.data?.message)) {
+          console.log(data.response.data.message);
+          enqueueSnackbar(data.response.data.message[0], {
+            variant: "error",
+          });
+        } else {
+          enqueueSnackbar(data?.response?.data?.message, { variant: "error" });
+        }
+      }
+    },
+    [enqueueSnackbar]
+  );
+
+  const { mutate: signOutMutation } = useSignOutMutation(onSuccess, onError);
 
   return (
     <header>
@@ -59,11 +95,22 @@ export default function Navbar() {
               ))}
             </ul>
             {isLoggedIn ? (
-              <div>{user?.firstName}</div>
+              <>
+                <div>{user?.firstName}</div>
+                <Link className="btn" to="/dashboard/profile">
+                  Dashboard
+                </Link>
+                <div
+                  style={{ cursor: "pointer" }}
+                  onClick={() => signOutMutation()}
+                >
+                  Logout
+                </div>
+              </>
             ) : (
               <>
                 <Link to="/register" className="btn btn-blue me-3">
-                  Register As a Professional
+                  Register
                 </Link>
                 <Link to="/login" className="btn btn-blue">
                   Login

@@ -1,4 +1,8 @@
+import { useAuthContext } from "../../../hooks/useAuthContext";
+
 export default function ProfileView() {
+  const { user } = useAuthContext();
+
   return (
     <div className="col-9 bg-white changeuser p-4">
       <div className="d-flex userdiv mt-4">
@@ -10,8 +14,8 @@ export default function ProfileView() {
           />
         </div>
         <div className="userdetails ">
-          <p className="fw-bold">Ram Shrestha</p>
-          <p className="text-secondary">ramshrestha@gmail.com</p>
+          <p className="fw-bold">{`${user?.firstName} ${user?.lastName}`}</p>
+          <p className="text-secondary">{user?.email}</p>
         </div>
       </div>
       <div className="row">

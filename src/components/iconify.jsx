@@ -14,14 +14,14 @@ const bgColorMap = {
   error: "rgba(201, 60, 70,0.4)",
 };
 
-const Iconify = ({ icon, width = 20, color }) => {
+const Iconify = ({ icon, width = 20, color, padding = "12px" }) => {
   return (
     <div
       style={{
         borderRadius: "5px",
         backgroundColor: bgColorMap[color],
         backgroundOpacity: "0.5",
-        padding: "12px",
+        padding,
         display: "flex",
         alignItems: "center",
         marginRight: "10px",

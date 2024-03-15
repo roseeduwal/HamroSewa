@@ -11,7 +11,6 @@ export default function ServiceView() {
         <ProductList
           id={category.id}
           key={index}
-          home
           serviceName={category?.categoryName}
           data={category?.products}
         />
