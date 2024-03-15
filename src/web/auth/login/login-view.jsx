@@ -2,7 +2,7 @@ import { useCallback, useState } from "react";
 import { useSnackbar } from "notistack";
 import { useLoginMutation } from "../../../hooks/useAuth";
 import { useAuthContext } from "../../../hooks/useAuthContext";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import LoadingButton from "../../../components/loading-button";
 
 export default function LoginView() {
@@ -64,10 +64,15 @@ export default function LoginView() {
     <>
       <div className="container-fluid ">
         <div className="row mt-4">
-          <div className="col-6">
+          <div className="col-6 d-flex align-items-center justify-content-center">
             <img
               src="https://firebasestorage.googleapis.com/v0/b/shop-a6a23.appspot.com/o/login%2Flogin.png?alt=media&token=25cd877a-b6b9-47c6-957a-63b6cd157713"
-              style={{ height: "500px", width: "500px", flexGrow: "1" }}
+              style={{
+                height: "500px",
+                width: "500px",
+                flexGrow: "1",
+                objectFit: "contain",
+              }}
             />
           </div>
           <div className="col-6">
@@ -116,9 +121,9 @@ export default function LoginView() {
               </LoadingButton>
               <div className="d-flex justify-content-center mt-3">
                 <p>Don’t have an account? </p>
-                <a href="" className="link ms-3">
+                <Link to="/register" className="link ms-3">
                   Register Now
-                </a>
+                </Link>
               </div>
               <div className="title position-relative border-bottom border-black">
                 <span

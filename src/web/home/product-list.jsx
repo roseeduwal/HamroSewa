@@ -6,9 +6,11 @@ export default function ProductList({ id, serviceName, data, home }) {
     <>
       <div className="d-flex align-items-center justify-content-between mt-4 ">
         <div className="fs-1 fw-bold ms-4">{serviceName}</div>
-        <Link to={`/service/${id}`} className="me-4">
-          View All
-        </Link>
+        {!home && (
+          <Link to={`/service/${id}`} className="me-4">
+            View All
+          </Link>
+        )}
       </div>
 
       <div className="container-fluid mt-3">

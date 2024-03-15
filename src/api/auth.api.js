@@ -7,3 +7,17 @@ export function login(loginCredential) {
 export function register(userCredential) {
   return api.post("auth/sign-up", userCredential);
 }
+
+export function logout() {
+  return api.post("auth/sign-out");
+}
+
+export function verifyEmail(token) {
+  return api.post(
+    `auth/verify-email`,
+    { token },
+    {
+      headers: { "Content-Type": "application/json" },
+    }
+  );
+}

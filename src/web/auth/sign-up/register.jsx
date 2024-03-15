@@ -3,8 +3,12 @@ import LoadingButton from "../../../components/loading-button";
 import { useSignUpMutation } from "../../../hooks/useAuth";
 import { useSnackbar } from "notistack";
 import { useNavigate } from "react-router-dom";
+import { useFetchCategoryQuery } from "../../../hooks/useCategory";
+import Iconify from "../../../components/iconify";
 
 export default function RegisterView() {
+  const [userType, setUserType] = useState("User");
+  const [viewPassword, setViewPassword] = useState(false);
   const [userCredentials, setUserCredentials] = useState({
     firstName: "",
     middleName: "",
@@ -12,7 +16,10 @@ export default function RegisterView() {
     contactNumber: "",
     email: "",
     password: "",
+    profession: 0,
   });
+
+  const { data: categories } = useFetchCategoryQuery();
 
   const navigate = useNavigate();
 
@@ -60,21 +67,55 @@ export default function RegisterView() {
   const handleSubmit = useCallback(
     (e) => {
       e.preventDefault();
-      signUpMutation(userCredentials);
+      if (userType === "Professional") {
+        if (userCredentials.profession === 0) {
+          enqueueSnackbar("Please select a profession", { variant: "error" });
+          return;
+        }
+      }
+      signUpMutation({ ...userCredentials, role: userType });
     },
-    [signUpMutation, userCredentials]
+    [signUpMutation, userType, enqueueSnackbar, userCredentials]
   );
+  console.log(userCredentials);
   return (
     <>
       <div className="row mt-4">
-        <div className="col-6">
+        <div className="col-6 d-flex align-items-center justify-content-center">
           <img
             src="https://firebasestorage.googleapis.com/v0/b/shop-a6a23.appspot.com/o/register%2Fprofessionals.png?alt=media&token=3adec4f7-f8c4-47a6-88bb-54636ac9b255"
-            style={{ height: "500px", width: "500px", flexGrow: "1" }}
+            style={{
+              height: "500px",
+              width: "500px",
+              flexGrow: "1",
+              objectFit: "contain",
+            }}
           />
         </div>
         <div className="col-6">
           <form className="bg-white  p-5" onSubmit={handleSubmit}>
+            <div className="d-flex justify-content-around">
+              <div
+                onClick={() => setUserType("Professional")}
+                style={{ cursor: "pointer" }}
+                className={`cursor-pointer ${
+                  userType === "Professional"
+                    ? "bg-primary text-white"
+                    : "bg-white"
+                }  p-5 rounded`}
+              >
+                Professional
+              </div>
+              <div
+                onClick={() => setUserType("User")}
+                style={{ cursor: "pointer" }}
+                className={`cursor-pointer ${
+                  userType === "User" ? "bg-primary text-white" : "bg-white"
+                }  p-5 rounded`}
+              >
+                User
+              </div>
+            </div>
             <h3 className="fs-4 fw-bold mb-4">
               Join Hamro Sewa to change your Life
             </h3>
@@ -152,29 +193,56 @@ export default function RegisterView() {
                 aria-describedby="addressHelp"
               />
             </div>
-            <div className="mb-3">
-              <label htmlFor="password" className="form-label">
-                Password*
-              </label>
+            <label htmlFor="password" className="form-label">
+              Password*
+            </label>
+            <div className="input-group mb-3">
               <input
-                type="password"
+                type={viewPassword ? "text" : "password"}
                 value={userCredentials.password}
                 onChange={handleChange}
                 className="form-control"
                 id="password"
                 name="password"
               />
+              <div
+                onClick={() => setViewPassword((preVal) => !preVal)}
+                style={{ cursor: "pointer" }}
+                className="input-group-prepend"
+              >
+                <span className="input-group-text p-0" id="basic-addon1">
+                  {viewPassword ? (
+                    <Iconify icon="iconoir:eye-solid" padding="10px" />
+                  ) : (
+                    <Iconify
+                      icon="teenyicons:eye-closed-outline"
+                      padding="10px"
+                    />
+                  )}
+                </span>
+              </div>
             </div>
-            <div className="mb-3">
-              <label htmlFor="exampleInputnumber1" className="form-label">
-                Services
-              </label>
-              <input
-                type="number"
-                className="form-control"
-                id="examplenumber1"
-              />
-            </div>
+
+            {userType === "Professional" && (
+              <div className="mb-3">
+                <label htmlFor="exampleInputnumber1" className="form-label">
+                  Services
+                </label>
+                <select
+                  onChange={handleChange}
+                  name="profession"
+                  className="form-select"
+                  aria-label="Default select example"
+                >
+                  <option>Select One</option>
+                  {categories?.data?.map((category) => (
+                    <option key={category.id} value={category.id}>
+                      {category.categoryName}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )}
 
             <LoadingButton
               isLoading={isLoading}
