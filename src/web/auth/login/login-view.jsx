@@ -12,10 +12,9 @@ export default function LoginView() {
     password: "",
   });
 
-  const navigate = useNavigate();
-
   const { dispatch } = useAuthContext();
 
+  const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
 
   const onSuccess = useCallback(
@@ -31,7 +30,7 @@ export default function LoginView() {
 
   const onError = useCallback(
     (error) => {
-      console.log(error);
+      error;
       enqueueSnackbar(
         error?.response?.data?.message ?? "Something went wrong",
         { variant: "error" }

@@ -38,7 +38,7 @@ export default function RegisterView() {
     (data) => {
       if (data?.response?.status === 400) {
         if (Array.isArray(data?.response?.data?.message)) {
-          console.log(data.response.data.message);
+          data.response.data.message;
           enqueueSnackbar(data.response.data.message[0], {
             variant: "error",
           });
@@ -77,7 +77,7 @@ export default function RegisterView() {
     },
     [signUpMutation, userType, enqueueSnackbar, userCredentials]
   );
-  console.log(userCredentials);
+  userCredentials;
   return (
     <>
       <div className="row mt-4">

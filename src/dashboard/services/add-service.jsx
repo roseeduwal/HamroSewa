@@ -15,9 +15,9 @@ export default function AddService() {
   const [productImage, setProductImage] = useState("");
   const [preview, setPreview] = useState("");
 
-  const navigate = useNavigate();
-
   const { data: categories } = useFetchCategoryQuery();
+
+  const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
 
   const onSuccess = useCallback(() => {
@@ -27,7 +27,7 @@ export default function AddService() {
 
   const onError = useCallback(
     (error) => {
-      console.log(error);
+      error;
       enqueueSnackbar(
         error?.response?.data?.message[0] ?? "Something went wrong",
         { variant: "error" }
@@ -161,11 +161,7 @@ export default function AddService() {
             )}
           </div>
 
-          <LoadingButton
-            // isLoading={isLoading}
-            type="submit"
-            style="btn btn-primary w-100 mt-3"
-          >
+          <LoadingButton type="submit" style="btn btn-primary w-100 mt-3">
             Add Product
           </LoadingButton>
         </form>

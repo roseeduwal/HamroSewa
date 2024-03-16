@@ -21,6 +21,8 @@ import ServicesView from "./dashboard/services/view/services-view.jsx";
 import CategoryView from "./dashboard/categories/view/categories-view.jsx";
 import AddService from "./dashboard/services/add-service.jsx";
 import VerifyEmail from "./web/auth/verify-email/verify-email.jsx";
+import { CartContextProvider } from "./context/cart-context.jsx";
+import CheckoutView from "./web/checkout/view/checkout-view.jsx";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +41,10 @@ const router = createBrowserRouter([
       {
         path: "/service/:id",
         element: <ServiceDetailView />,
+      },
+      {
+        path: "/checkout",
+        element: <CheckoutView />,
       },
       {
         path: "/about-us",
@@ -97,7 +103,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <SnackbarProvider>
       <QueryClientProvider client={queryClient}>
         <AuthContextProvider>
-          <RouterProvider router={router} />
+          <CartContextProvider>
+            <RouterProvider router={router} />
+          </CartContextProvider>
         </AuthContextProvider>
       </QueryClientProvider>
     </SnackbarProvider>
