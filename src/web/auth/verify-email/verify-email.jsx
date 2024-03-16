@@ -12,7 +12,7 @@ export default function VerifyEmail() {
   const onSuccess = useCallback(
     (data) => {
       if (data.status === 201) {
-        console.log("here");
+        ("here");
         enqueueSnackbar("Email verified successfully!");
         navigate("/login");
       }
@@ -23,7 +23,7 @@ export default function VerifyEmail() {
     (data) => {
       if (data?.response?.status === 400) {
         if (Array.isArray(data?.response?.data?.message)) {
-          console.log(data.response.data.message);
+          data.response.data.message;
           enqueueSnackbar(data.response.data.message[0], {
             variant: "error",
           });

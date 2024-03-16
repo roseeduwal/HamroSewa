@@ -44,7 +44,6 @@ export default function Navbar() {
     (data) => {
       if (data?.response?.status === 400) {
         if (Array.isArray(data?.response?.data?.message)) {
-          console.log(data.response.data.message);
           enqueueSnackbar(data.response.data.message[0], {
             variant: "error",
           });

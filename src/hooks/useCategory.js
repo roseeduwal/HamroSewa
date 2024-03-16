@@ -9,7 +9,7 @@ export const useFetchCategoryQuery = () => {
 };
 
 export const useFetchCategoryDetailQuery = (id) => {
-  console.log("id", id);
+  "id", id;
   return useQuery(["categories", id], () => fetchCategoryDetail(id), {
     refetchOnWindowFocus: false,
 

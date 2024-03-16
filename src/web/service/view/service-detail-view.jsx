@@ -2,12 +2,15 @@ import { useParams } from "react-router-dom";
 import { useFetchCategoryDetailQuery } from "../../../hooks/useCategory";
 import Loader from "../../../components/loader";
 import Iconify from "../../../components/iconify";
+import ServiceDetailCard from "../service-detail-card";
+import CartDetails from "../cart-detail";
+import { useFetchCartItemQuery } from "../../../hooks/useCartItem";
 
 export default function ServiceDetailView() {
   const { id } = useParams();
-  console.log(id);
+  id;
   const { data: category, isLoading } = useFetchCategoryDetailQuery(id);
-  console.log(category);
+  const { data: cartItems } = useFetchCartItemQuery();
 
   if (isLoading) return <Loader />;
   return (
@@ -106,25 +109,11 @@ export default function ServiceDetailView() {
 
               {category?.data?.products.map((product, index) => (
                 <>
-                  <div key={index} className="d-flex justify-content-between">
-                    <div className="mt-3">
-                      <p className="fw-bold fs-5">{product.productName}</p>
-                      <div className="d-flex align-items-center">
-                        <i className="ph ph-star"></i>
-                        <p className="">4.5(30 Bookings)</p>
-                      </div>
-                      <p className="text-danger fw-bold">
-                        Starts at Rs.{product.productPrice}
-                      </p>
-                      <p> {product.productDescription}</p>
-                      <a className="ratebutton mb-3" href="#" role="link">
-                        Rate
-                      </a>
-                    </div>
-                    <div>
-                      <img src={product.productImageUrl} alt="" />
-                    </div>
-                  </div>
+                  <ServiceDetailCard
+                    cartItems={cartItems}
+                    key={index}
+                    product={product}
+                  />
                   {category?.data?.products.length > 1 && <hr />}
                 </>
               ))}
@@ -132,12 +121,7 @@ export default function ServiceDetailView() {
           </div>
 
           <div className=" col-4 mt-3 cartcolumn  ">
-            <div className="shadow rounded bg-white p-4">
-              <div className="p-4 d-flex justify-content-center ">
-                <Iconify icon="bi:cart" width={150} />
-              </div>
-              <p className="fw-bold text-center">No Items In Your Cart </p>
-            </div>
+            <CartDetails cartItems={cartItems} />
 
             <div className="row bg-white shadow rounded mt-4">
               <div className=" d-flex align-items-center cartdown">
