@@ -1,7 +1,7 @@
 export default function ProductCard({ name, description, price, image, home }) {
   return (
     <div className="col-lg-3">
-      <div className="card">
+      <div className="card border-0 shadow ">
         <img
           className="card-img-top"
           src={image}

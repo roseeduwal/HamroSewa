@@ -27,16 +27,17 @@ export default function AddService() {
 
   const onError = useCallback(
     (error) => {
-      error;
       enqueueSnackbar(
-        error?.response?.data?.message[0] ?? "Something went wrong",
+        Array.isArray(error?.response?.data?.message)
+          ? error?.response?.data?.message[0]
+          : error?.response?.data?.message,
         { variant: "error" }
       );
     },
     [enqueueSnackbar]
   );
 
-  const { mutate: addProductMutation } = useAddServiceMutation(
+  const { mutate: addProductMutation, isLoading } = useAddServiceMutation(
     onSuccess,
     onError
   );
@@ -65,7 +66,7 @@ export default function AddService() {
   );
 
   return (
-    <div className="col-9 bg-white shadow rounded p-4">
+    <div className="shadow rounded mt-4 p-4">
       <div className="d-flex align-items-center justify-content-between">
         <h3 className="">Add Services</h3>
       </div>
@@ -161,7 +162,11 @@ export default function AddService() {
             )}
           </div>
 
-          <LoadingButton type="submit" style="btn btn-primary w-100 mt-3">
+          <LoadingButton
+            isLoading={isLoading}
+            type="submit"
+            style="btn btn-primary w-100 mt-3"
+          >
             Add Product
           </LoadingButton>
         </form>

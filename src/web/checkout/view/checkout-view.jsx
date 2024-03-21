@@ -15,7 +15,7 @@ export default function CheckoutView() {
 
   const onSuccess = useCallback(() => {
     enqueueSnackbar("Service add successful", { variant: "success" });
-    navigate("/dashboard/services");
+    navigate("/dashboard/book-services");
   }, [enqueueSnackbar, navigate]);
 
   const onError = useCallback(
@@ -56,22 +56,26 @@ export default function CheckoutView() {
     >
       <p className="fw-bold fs-2 text-center ">Checkout</p>
       <h3>Summary</h3>
-      {cartItems?.data?.cartItems?.map((product, index) => (
-        <div key={index} className="items p-4 d-flex justify-content-between">
-          <div className="">
-            <p>{product?.product?.productName}</p>
-            <p>Rs. {product.product.productPrice}</p>
-          </div>
-
-          <div className="wrapper">
-            <span className="num">{product.quantity}</span>
-          </div>
-
-          <div className="fw-bold">
-            <p>Rs. {product.totalPrice}</p>
-          </div>
-        </div>
-      ))}
+      <table className="table mt-4">
+        <thead>
+          <tr>
+            <th scope="col">S.N</th>
+            <th scope="col">Name</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Rate</th>
+          </tr>
+        </thead>
+        <tbody>
+          {cartItems?.data?.cartItems?.map((product, index) => (
+            <tr key={index}>
+              <th scope="row">{index + 1}</th>
+              <td>{product?.product?.productName}</td>
+              <td>{product.quantity}</td>
+              <td>Rs. {product.product.productPrice}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
 
       <div className="row">
         <div className=" col-8 bill mt-4 p-4">

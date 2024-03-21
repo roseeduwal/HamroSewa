@@ -7,3 +7,11 @@ export const fetchCategory = () => {
 export const fetchCategoryDetail = (id) => {
   return api.get(`categories/${id}`);
 };
+
+export const addCategory = (categoryDetail) => {
+  return api.post("categories", categoryDetail);
+};
+
+export const deleteCategory = (id) => {
+  return api.delete(`categories/${id}`);
+};

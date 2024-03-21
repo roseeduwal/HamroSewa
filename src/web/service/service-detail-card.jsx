@@ -15,9 +15,8 @@ export default function ServiceDetailCard({ product, cartItems }) {
   const { enqueueSnackbar } = useSnackbar();
 
   const onSuccess = useCallback(() => {
-    enqueueSnackbar("User logged in successfully", { variant: "success" });
     queryClient.invalidateQueries("cart-item");
-  }, [enqueueSnackbar, queryClient]);
+  }, [queryClient]);
 
   const onError = useCallback(
     (error) => {
@@ -49,8 +48,8 @@ export default function ServiceDetailCard({ product, cartItems }) {
     }
     const quantity = cartItems?.data?.cartItems?.find(
       (cartItem) => cartItem.productId === product.id
-    ).quantity;
-    setAmount(quantity);
+    )?.quantity;
+    setAmount(quantity ?? 0);
   }, [cartItems, product.id, isLoggedIn]);
   return (
     <>
@@ -71,7 +70,12 @@ export default function ServiceDetailCard({ product, cartItems }) {
             </a>
           </div>
           <div className="">
-            <img className="d-block" src={product.productImageUrl} alt="" />
+            <img
+              className="d-block"
+              src={product.productImageUrl}
+              alt=""
+              style={{ width: "200px", height: "200px", objectFit: "contain" }}
+            />
             <div className="d-flex align-items-center  justify-content-center">
               <div
                 className="mr-4 d-flex align-items-center justify-content-between"
@@ -94,7 +98,7 @@ export default function ServiceDetailCard({ product, cartItems }) {
                       return;
                     }
                     setAmount((preVal) => preVal - 1);
-                    handleAddToCart(amount + 1);
+                    handleAddToCart(amount - 1);
                   }}
                 >
                   -

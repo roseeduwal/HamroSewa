@@ -1,6 +1,6 @@
 export default function MyReviewsView() {
   return (
-    <div className="col-9 bg-white changeuser p-4">
+    <div className="mt-4 shadow rounded p-4">
       <p className="fw-bold fs-3 p-2">My Reviews</p>
       <div className="boxx p-4">
         <div className="greyshawdow p-2 container-fluid">

@@ -23,6 +23,7 @@ import AddService from "./dashboard/services/add-service.jsx";
 import VerifyEmail from "./web/auth/verify-email/verify-email.jsx";
 import { CartContextProvider } from "./context/cart-context.jsx";
 import CheckoutView from "./web/checkout/view/checkout-view.jsx";
+import AddCategory from "./dashboard/categories/add-category.jsx";
 
 const router = createBrowserRouter([
   {
@@ -73,6 +74,10 @@ const router = createBrowserRouter([
           {
             path: "categories",
             element: <CategoryView />,
+          },
+          {
+            path: "categories/add-category",
+            element: <AddCategory />,
           },
           {
             path: "services",

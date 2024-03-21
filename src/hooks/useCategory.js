@@ -1,5 +1,10 @@
-import { useQuery } from "react-query";
-import { fetchCategory, fetchCategoryDetail } from "../api/category.api";
+import { useMutation, useQuery } from "react-query";
+import {
+  addCategory,
+  deleteCategory,
+  fetchCategory,
+  fetchCategoryDetail,
+} from "../api/category.api";
 
 export const useFetchCategoryQuery = () => {
   return useQuery("categories", fetchCategory, {
@@ -9,10 +14,16 @@ export const useFetchCategoryQuery = () => {
 };
 
 export const useFetchCategoryDetailQuery = (id) => {
-  "id", id;
   return useQuery(["categories", id], () => fetchCategoryDetail(id), {
     refetchOnWindowFocus: false,
-
     retry: 1,
   });
+};
+
+export const useAddCategoryMutation = (onSuccess, onError) => {
+  return useMutation({ mutationFn: addCategory, onError, onSuccess });
+};
+
+export const useDeleteCategoryMutation = (onSuccess, onError) => {
+  return useMutation({ mutationFn: deleteCategory, onError, onSuccess });
 };

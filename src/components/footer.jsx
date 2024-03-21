@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
     <footer>
-      <div className="d-flex align-items-top justify-content-between bg-white p-3 mt-4">
+      <div className="d-flex align-items-top justify-content-between bg-white p-3">
         <div>
           <div className="row">
             <h6 className="fw-bold">More About Us</h6>

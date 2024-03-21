@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "react-query";
-import { addService, fetchServices } from "../api/service.api";
+import { addService, deleteService, fetchServices } from "../api/service.api";
 
 export const useFetchServiceQuery = () => {
   return useQuery("services", fetchServices, {
@@ -10,4 +10,8 @@ export const useFetchServiceQuery = () => {
 
 export const useAddServiceMutation = (onSuccess, onError) => {
   return useMutation({ mutationFn: addService, onError, onSuccess });
+};
+
+export const useDeleteServiceMutation = (onSuccess, onError) => {
+  return useMutation({ mutationFn: deleteService, onError, onSuccess });
 };

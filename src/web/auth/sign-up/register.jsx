@@ -94,31 +94,10 @@ export default function RegisterView() {
         </div>
         <div className="col-6">
           <form className="bg-white  p-5" onSubmit={handleSubmit}>
-            <div className="d-flex justify-content-around">
-              <div
-                onClick={() => setUserType("Professional")}
-                style={{ cursor: "pointer" }}
-                className={`cursor-pointer ${
-                  userType === "Professional"
-                    ? "bg-primary text-white"
-                    : "bg-white"
-                }  p-5 rounded`}
-              >
-                Professional
-              </div>
-              <div
-                onClick={() => setUserType("User")}
-                style={{ cursor: "pointer" }}
-                className={`cursor-pointer ${
-                  userType === "User" ? "bg-primary text-white" : "bg-white"
-                }  p-5 rounded`}
-              >
-                User
-              </div>
-            </div>
             <h3 className="fs-4 fw-bold mb-4">
               Join Hamro Sewa to change your Life
             </h3>
+
             <div className="mb-3">
               <label htmlFor="firstName" className="form-label">
                 First Name*
@@ -220,6 +199,28 @@ export default function RegisterView() {
                     />
                   )}
                 </span>
+              </div>
+            </div>
+            <div className="d-flex justify-content-start align-items-center">
+              <div
+                onClick={() => setUserType("Professional")}
+                style={{ cursor: "pointer" }}
+                className={`cursor-pointer ${
+                  userType === "Professional"
+                    ? "bg-primary text-white"
+                    : "bg-white"
+                }  px-5 py-3 rounded`}
+              >
+                Professional
+              </div>
+              <div
+                onClick={() => setUserType("User")}
+                style={{ cursor: "pointer" }}
+                className={`cursor-pointer ${
+                  userType === "User" ? "bg-primary text-white" : "bg-white"
+                }  px-5 py-3 rounded`}
+              >
+                User
               </div>
             </div>
 

@@ -5,10 +5,12 @@ import AppGuard from "../guard/app.guard";
 export default function Dashboard() {
   return (
     <AppGuard>
-      <div className="container-fluid">
-        <div className="row mt-4 d-flex justify-content-between ">
+      <div className="">
+        <div className="row d-flex">
           <Sidebar />
-          <Outlet />
+          <div className="col-10">
+            <Outlet />
+          </div>
         </div>
       </div>
     </AppGuard>

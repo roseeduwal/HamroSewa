@@ -4,8 +4,10 @@ import { useLoginMutation } from "../../../hooks/useAuth";
 import { useAuthContext } from "../../../hooks/useAuthContext";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import LoadingButton from "../../../components/loading-button";
+import Iconify from "../../../components/iconify";
 
 export default function LoginView() {
+  const [viewPassword, setViewPassword] = useState(false);
   const [searchParams] = useSearchParams();
   const [loginCredential, setLoginCredential] = useState({
     email: "",
@@ -102,14 +104,32 @@ export default function LoginView() {
                 <label htmlFor="exampleInputPassword1" className="form-label">
                   Password
                 </label>
-                <input
-                  onChange={handleChange}
-                  value={loginCredential.password}
-                  name="password"
-                  type="password"
-                  className="form-control"
-                  id="exampleInputPassword1"
-                />
+                <div className="input-group mb-3">
+                  <input
+                    onChange={handleChange}
+                    value={loginCredential.password}
+                    name="password"
+                    type={viewPassword ? "text" : "password"}
+                    className="form-control"
+                    id="exampleInputPassword1"
+                  />
+                  <div
+                    onClick={() => setViewPassword((preVal) => !preVal)}
+                    style={{ cursor: "pointer" }}
+                    className="input-group-prepend"
+                  >
+                    <span className="input-group-text p-0" id="basic-addon1">
+                      {viewPassword ? (
+                        <Iconify icon="iconoir:eye-solid" padding="10px" />
+                      ) : (
+                        <Iconify
+                          icon="teenyicons:eye-closed-outline"
+                          padding="10px"
+                        />
+                      )}
+                    </span>
+                  </div>
+                </div>
               </div>
               <LoadingButton
                 isLoading={isLoading}

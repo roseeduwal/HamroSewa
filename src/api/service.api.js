@@ -9,3 +9,7 @@ export function addService(productDetail) {
     headers: { "Content-Type": "multipart/form-data" },
   });
 }
+
+export function deleteService(id) {
+  return api.delete(`products/${id}`);
+}

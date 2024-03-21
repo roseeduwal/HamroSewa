@@ -26,10 +26,15 @@ export default function AppLayout({ children }) {
       </div>
     );
   return (
-    <>
-      <Navbar />
-      {children}
+    <div
+      className="d-flex flex-column justify-content-between align-items-between"
+      style={{ height: "100vh" }}
+    >
+      <div>
+        <Navbar />
+        {children}
+      </div>
       <Footer />
-    </>
+    </div>
   );
 }

@@ -25,12 +25,12 @@ export default function ServiceDetailView() {
             </div>
           </div>
           <div className="col-9 slider imageslider">
-            <img
+            {/* <img
               src="../images/cleanslider.webp"
               className="w-100 h-100"
               alt="..."
-            />
-            <div id="carouselExampleIndicators" className="carousel slide">
+            /> */}
+            {/* <div id="carouselExampleIndicators" className="carousel slide">
               <div className="carousel-indicators">
                 <button
                   type="button"
@@ -96,7 +96,7 @@ export default function ServiceDetailView() {
                 ></span>
                 <span className="visually-hidden">Next</span>
               </button>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

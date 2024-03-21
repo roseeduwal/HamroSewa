@@ -4,11 +4,12 @@ export default function ProfileView() {
   const { user } = useAuthContext();
 
   return (
-    <div className="col-9 bg-white changeuser p-4">
-      <div className="d-flex userdiv mt-4">
-        <div className="mt-3 userphoto">
+    <div className="rounded mt-4 shadow p-4">
+      <div className="d-flex align-items-center userdiv mt-4">
+        <div className="mt-3  userphoto">
           <img
-            src="../images/client1.png"
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png"
+            style={{ height: "100px", width: "100px", marginRight: "20px" }}
             className="rounded-circle"
             alt="Userphoto"
           />
@@ -27,6 +28,9 @@ export default function ProfileView() {
                 Full Name
               </label>
               <input
+                value={`${user.firstName} ${user.middleName ?? ""} ${
+                  user.lastName
+                }`}
                 type="fullname"
                 className="form-control"
                 id="exampleInputfullname"
@@ -39,6 +43,7 @@ export default function ProfileView() {
               </label>
               <input
                 type="email"
+                value={user.email}
                 className="form-control"
                 id="exampleInputEmail1"
                 aria-describedby="emailHelp"
@@ -50,6 +55,7 @@ export default function ProfileView() {
               </label>
               <input
                 type="phonenumber"
+                value={user.contactNumber}
                 className="form-control"
                 id="exampleInputphonenumber"
                 aria-describedby="phonenumberHelp"
