@@ -59,7 +59,7 @@ export default function BookServicesView() {
               <td>
                 {booking.bookingItems.map((item, index) => (
                   <div key={item.id}>
-                    {item.product.productName}{" "}
+                    {item?.product?.productName}{" "}
                     {booking.bookingItems.length !== index + 1 && ","}
                   </div>
                 ))}
