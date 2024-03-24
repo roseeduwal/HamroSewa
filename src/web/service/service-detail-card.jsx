@@ -68,27 +68,42 @@ export default function ServiceDetailCard({ product, cartItems }) {
 
   return (
     <>
-      <>
-        <div className="d-flex justify-content-between">
-          <div className="mt-3">
-            <p className="fw-bold fs-5">{product.productName}</p>
-            <div className="d-flex align-items-center">
-              <i className="ph ph-star"></i>
-              <p className="d-flex align-items-center">
-                <Iconify
-                  marginRight="5px"
-                  padding="0"
-                  icon="fluent-emoji-flat:star"
-                />
-                <div>
-                  {product.rating ?? 0}({product.bookings} Bookings)
-                </div>
+      <div className="">
+        <div className="mt-3">
+          <div className="d-flex mb-1 justify-content-between">
+            <div>
+              <p className="fw-bold fs-5">{product.productName}</p>
+              <div className="d-flex align-items-center">
+                <i className="ph ph-star"></i>
+                <p className="d-flex align-items-center">
+                  <Iconify
+                    marginRight="5px"
+                    padding="0"
+                    icon="fluent-emoji-flat:star"
+                  />
+                  <div>
+                    {product.rating ?? 0}({product.bookings} Bookings)
+                  </div>
+                </p>
+              </div>
+              <p className="text-danger fw-bold">
+                Starts at Rs.{product.productPrice}
               </p>
+              <p className=""> {product.productDescription}</p>
             </div>
-            <p className="text-danger fw-bold">
-              Starts at Rs.{product.productPrice}
-            </p>
-            <p> {product.productDescription}</p>
+            <img
+              className="d-block mb-3"
+              src={product.productImageUrl}
+              alt=""
+              style={{
+                width: "200px",
+                height: "200px",
+                objectFit: "contain",
+              }}
+            />
+          </div>
+
+          <div className="d-flex justify-content-between">
             <div
               style={{ cursor: "pointer" }}
               onClick={handleShow}
@@ -97,79 +112,78 @@ export default function ServiceDetailCard({ product, cartItems }) {
             >
               Rate
             </div>
-          </div>
-          <div className="">
-            <img
-              className="d-block"
-              src={product.productImageUrl}
-              alt=""
-              style={{ width: "200px", height: "200px", objectFit: "contain" }}
-            />
-            <div className="d-flex align-items-center  justify-content-center">
+            <div style={{ width: "140px" }}>
               <div
-                className="mr-4 d-flex align-items-center justify-content-between"
-                style={{ marginRight: "10px" }}
+                className="d-flex align-items-center  justify-content-center"
+                style={{ width: "100px" }}
               >
                 <div
-                  style={{ cursor: "pointer" }}
-                  onClick={() => {
-                    if (!isLoggedIn) {
-                      navigate("/login");
-                      enqueueSnackbar("Please login first", {
-                        variant: "error",
-                      });
-                      return;
-                    }
-                    if (amount <= 0) {
-                      enqueueSnackbar("Cannot be less than 0", {
-                        variant: "error",
-                      });
-                      return;
-                    }
-                    setAmount((preVal) => preVal - 1);
-                    handleAddToCart(amount - 1);
-                  }}
+                  className="mr-4 d-flex align-items-center justify-content-between"
+                  style={{ marginRight: "10px" }}
                 >
-                  -
-                </div>
-                <div
-                  className="border border-secondary rounded"
-                  style={{ margin: "0 10px", padding: "1px 10px" }}
-                >
-                  {amount}
-                </div>
-                <div
-                  style={{ cursor: "pointer" }}
-                  onClick={() => {
-                    if (!isLoggedIn) {
-                      navigate("/login");
-                      enqueueSnackbar("Please login first", {
-                        variant: "error",
-                      });
-                      return;
-                    }
-                    if (amount >= 3) {
-                      enqueueSnackbar("Cannot add more", { variant: "error" });
-                      return;
-                    }
-                    if (user.role === "Admin") {
-                      enqueueSnackbar("Forbidden resource", {
-                        variant: "error",
-                      });
-                      return;
-                    }
+                  <div
+                    style={{ cursor: "pointer" }}
+                    onClick={() => {
+                      if (!isLoggedIn) {
+                        navigate("/login");
+                        enqueueSnackbar("Please login first", {
+                          variant: "error",
+                        });
+                        return;
+                      }
+                      if (amount <= 0) {
+                        enqueueSnackbar("Cannot be less than 0", {
+                          variant: "error",
+                        });
+                        return;
+                      }
+                      setAmount((preVal) => preVal - 1);
+                      handleAddToCart(amount - 1);
+                    }}
+                  >
+                    -
+                  </div>
+                  <div
+                    className="border border-secondary rounded"
+                    style={{ margin: "0 10px", padding: "1px 10px" }}
+                  >
+                    {amount}
+                  </div>
+                  <div
+                    style={{ cursor: "pointer" }}
+                    onClick={() => {
+                      if (!isLoggedIn) {
+                        navigate("/login");
+                        enqueueSnackbar("Please login first", {
+                          variant: "error",
+                        });
+                        return;
+                      }
+                      if (amount >= 3) {
+                        enqueueSnackbar("Cannot add more", {
+                          variant: "error",
+                        });
+                        return;
+                      }
+                      if (user.role === "Admin") {
+                        enqueueSnackbar("Forbidden resource", {
+                          variant: "error",
+                        });
+                        return;
+                      }
 
-                    setAmount((preVal) => preVal + 1);
-                    handleAddToCart(amount + 1);
-                  }}
-                >
-                  +
+                      setAmount((preVal) => preVal + 1);
+                      handleAddToCart(amount + 1);
+                    }}
+                  >
+                    +
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </>
+      </div>
       <ReviewModal
         productId={product.id}
         handleClose={handleClose}

@@ -21,83 +21,9 @@ export default function ServiceDetailView() {
             <div className="d-flex align-items-center">
               <i className="ph ph-star"></i>
               <p className="fs-4 mb-0">
-                {category.data.rating}({category.data.bookings} Bookings)
+                {category?.data?.rating}({category.data.bookings} Bookings)
               </p>
             </div>
-          </div>
-          <div className="col-9 slider imageslider">
-            {/* <img
-              src="../images/cleanslider.webp"
-              className="w-100 h-100"
-              alt="..."
-            /> */}
-            {/* <div id="carouselExampleIndicators" className="carousel slide">
-              <div className="carousel-indicators">
-                <button
-                  type="button"
-                  data-bs-target="#carouselExampleIndicators"
-                  data-bs-slide-to="0"
-                  className="active"
-                  aria-current="true"
-                  aria-label="Slide 1"
-                ></button>
-                <button
-                  type="button"
-                  data-bs-target="#carouselExampleIndicators"
-                  data-bs-slide-to="1"
-                  aria-label="Slide 2"
-                ></button>
-                <button
-                  type="button"
-                  data-bs-target="#carouselExampleIndicators"
-                  data-bs-slide-to="2"
-                  aria-label="Slide 3"
-                ></button>
-              </div>
-              <div className="carousel-inner">
-                <div className="carousel-item active">
-                  <img
-                    src="../images/cleanslider3.jpg"
-                    className=""
-                    alt="..."
-                  />
-                </div>
-                <div className="carousel-item">
-                  <img src="../images/cleaning4.png" className=" " alt="..." />
-                </div>
-                <div className="carousel-item">
-                  <img
-                    src="../images/cleanslider2.webp"
-                    className=""
-                    alt="..."
-                  />
-                </div>
-              </div>
-              <button
-                className="carousel-control-prev"
-                type="button"
-                data-bs-target="#carouselExampleIndicators"
-                data-bs-slide="prev"
-              >
-                <span
-                  className="carousel-control-prev-icon"
-                  aria-hidden="true"
-                ></span>
-                <span className="visually-hidden">Previous</span>
-              </button>
-              <button
-                className="carousel-control-next"
-                type="button"
-                data-bs-target="#carouselExampleIndicators"
-                data-bs-slide="next"
-              >
-                <span
-                  className="carousel-control-next-icon"
-                  aria-hidden="true"
-                ></span>
-                <span className="visually-hidden">Next</span>
-              </button>
-            </div> */}
           </div>
         </div>
       </div>
@@ -105,7 +31,7 @@ export default function ServiceDetailView() {
       <div className="container-fluid">
         <div className="row ">
           <div className="col-8 ">
-            <div className="bg-white shadow rounded mt-3 p-4">
+            <div className="bg-white shadow rounded mt-3 px-4 py-2">
               <p className="fw-bold fs-3 mt-3">Services</p>
 
               {category?.data?.products.map((product, index) => (
