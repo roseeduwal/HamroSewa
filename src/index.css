@@ -1,7 +1,30 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;500&display=swap");
+
 body {
   background: white;
   font-family: "Poppins", sans-serif;
+
+  /* width */
+  ::-webkit-scrollbar {
+    width: 7px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px rgb(68, 68, 68);
+    border-radius: 10px;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: rgb(182, 177, 177);
+    border-radius: 10px;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(8, 8, 8);
+  }
 }
 .btn-blue {
   background-color: #3a76bb;
@@ -270,5 +293,29 @@ footer {
   }
   100% {
     background-position: 250% 0, 250% 0;
+  }
+}
+
+.scrollbar {
+  /* width */
+  ::-webkit-scrollbar {
+    width: 20px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: red;
+    border-radius: 10px;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #b30000;
   }
 }

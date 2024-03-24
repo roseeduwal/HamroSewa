@@ -1,14 +1,15 @@
 import { Link } from "react-router-dom";
-import Loader from "../../../components/loader";
+
+import { useCallback, useState } from "react";
+import { useQueryClient } from "react-query";
+import { useSnackbar } from "notistack";
 import {
   useDeleteServiceMutation,
   useFetchServiceQuery,
 } from "../../../hooks/useService";
 import CustomModal from "../../../components/modal";
 import TableRow from "../../../components/table-row";
-import { useCallback, useState } from "react";
-import { useQueryClient } from "react-query";
-import { useSnackbar } from "notistack";
+import Loader from "../../../components/loader";
 
 export default function ServicesView() {
   const [showModal, setShowModal] = useState(false);
@@ -46,6 +47,7 @@ export default function ServicesView() {
     setShowModal(true);
   };
   const { data: services, isLoading } = useFetchServiceQuery();
+  services;
   if (isLoading) return <Loader />;
   return (
     <>
@@ -68,8 +70,10 @@ export default function ServicesView() {
             </tr>
           </thead>
           <tbody>
-            {services?.data.map((service, index) => (
+            {services?.data?.map((service, index) => (
               <TableRow
+                path={`edit/${service.id}`}
+                edit={true}
                 id={service.id}
                 key={index}
                 showModal={showModal}

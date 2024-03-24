@@ -77,7 +77,6 @@ export default function RegisterView() {
     },
     [signUpMutation, userType, enqueueSnackbar, userCredentials]
   );
-  userCredentials;
   return (
     <>
       <div className="row mt-4">

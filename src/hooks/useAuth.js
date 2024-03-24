@@ -1,5 +1,11 @@
 import { useMutation } from "react-query";
-import { login, logout, register, verifyEmail } from "../api/auth.api";
+import {
+  changePassword,
+  login,
+  logout,
+  register,
+  verifyEmail,
+} from "../api/auth.api";
 
 export const useLoginMutation = (onSuccess, onError) => {
   return useMutation({ mutationFn: login, onError, onSuccess });
@@ -15,4 +21,8 @@ export const useSignOutMutation = (onSuccess, onError) => {
 
 export const useVerifyEmailMutation = (onSuccess, onError) => {
   return useMutation({ mutationFn: verifyEmail, onError, onSuccess });
+};
+
+export const useUpdatePasswordMutation = (onSuccess, onError) => {
+  return useMutation({ mutationFn: changePassword, onError, onSuccess });
 };

@@ -4,12 +4,16 @@ import { useAuthContext } from "../../hooks/useAuthContext";
 import { useNavigate } from "react-router-dom";
 import { useAddCartItemMutation } from "../../hooks/useCartItem";
 import { useQueryClient } from "react-query";
+import ReviewModal from "../../components/rating-modal";
+import Iconify from "../../components/iconify";
 
 export default function ServiceDetailCard({ product, cartItems }) {
   const [amount, setAmount] = useState(0);
+  const [showModal, setShowModal] = useState(false);
+
   const queryClient = useQueryClient();
 
-  const { isLoggedIn } = useAuthContext();
+  const { user, isLoggedIn } = useAuthContext();
 
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
@@ -51,6 +55,17 @@ export default function ServiceDetailCard({ product, cartItems }) {
     )?.quantity;
     setAmount(quantity ?? 0);
   }, [cartItems, product.id, isLoggedIn]);
+
+  const handleClose = () => {
+    setShowModal(false);
+  };
+
+  const handleShow = () => {
+    setShowModal(true);
+  };
+
+  const onDelete = useCallback(() => {}, []);
+
   return (
     <>
       <>
@@ -59,15 +74,29 @@ export default function ServiceDetailCard({ product, cartItems }) {
             <p className="fw-bold fs-5">{product.productName}</p>
             <div className="d-flex align-items-center">
               <i className="ph ph-star"></i>
-              <p className="">4.5(30 Bookings)</p>
+              <p className="d-flex align-items-center">
+                <Iconify
+                  marginRight="5px"
+                  padding="0"
+                  icon="fluent-emoji-flat:star"
+                />
+                <div>
+                  {product.rating ?? 0}({product.bookings} Bookings)
+                </div>
+              </p>
             </div>
             <p className="text-danger fw-bold">
               Starts at Rs.{product.productPrice}
             </p>
             <p> {product.productDescription}</p>
-            <a className="ratebutton mb-3" href="#" role="link">
+            <div
+              style={{ cursor: "pointer" }}
+              onClick={handleShow}
+              className="ratebutton mb-3"
+              role="link"
+            >
               Rate
-            </a>
+            </div>
           </div>
           <div className="">
             <img
@@ -123,6 +152,13 @@ export default function ServiceDetailCard({ product, cartItems }) {
                       enqueueSnackbar("Cannot add more", { variant: "error" });
                       return;
                     }
+                    if (user.role === "Admin") {
+                      enqueueSnackbar("Forbidden resource", {
+                        variant: "error",
+                      });
+                      return;
+                    }
+
                     setAmount((preVal) => preVal + 1);
                     handleAddToCart(amount + 1);
                   }}
@@ -134,6 +170,12 @@ export default function ServiceDetailCard({ product, cartItems }) {
           </div>
         </div>
       </>
+      <ReviewModal
+        productId={product.id}
+        handleClose={handleClose}
+        showModal={showModal}
+        onDelete={onDelete}
+      />
     </>
   );
 }

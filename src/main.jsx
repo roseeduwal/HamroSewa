@@ -24,6 +24,11 @@ import VerifyEmail from "./web/auth/verify-email/verify-email.jsx";
 import { CartContextProvider } from "./context/cart-context.jsx";
 import CheckoutView from "./web/checkout/view/checkout-view.jsx";
 import AddCategory from "./dashboard/categories/add-category.jsx";
+import EditCategory from "./dashboard/categories/edit-category.jsx";
+import EditService from "./dashboard/services/edit-service.jsx";
+import UserView from "./dashboard/users/view/user-view.jsx";
+import ProfessionalView from "./dashboard/professionals/view/professional-view.jsx";
+import ValidatePurchase from "./web/purchase/validate-purchase.jsx";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +39,11 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <HomeView />,
+      },
+
+      {
+        path: "/purchase",
+        element: <ValidatePurchase />,
       },
       {
         path: "/service",
@@ -80,8 +90,24 @@ const router = createBrowserRouter([
             element: <AddCategory />,
           },
           {
+            path: "categories/edit/:id",
+            element: <EditCategory />,
+          },
+          {
             path: "services",
             element: <ServicesView />,
+          },
+          {
+            path: "users",
+            element: <UserView />,
+          },
+          {
+            path: "professionals",
+            element: <ProfessionalView />,
+          },
+          {
+            path: "services/edit/:id",
+            element: <EditService />,
           },
           {
             path: "services/add-service",

@@ -1,8 +1,9 @@
 import { useCallback, useState } from "react";
 import CustomModal from "./modal";
 import Iconify from "./iconify";
+import { Link } from "react-router-dom";
 
-export default function TableRow({ id, children, handleDelete }) {
+export default function TableRow({ id, children, handleDelete, edit, path }) {
   const [showModal, setShowModal] = useState(false);
 
   const handleClose = () => {
@@ -14,7 +15,6 @@ export default function TableRow({ id, children, handleDelete }) {
   };
 
   const onDelete = useCallback(() => {
-    console.log("id", id);
     handleDelete(id);
   }, [id, handleDelete]);
   return (
@@ -22,9 +22,15 @@ export default function TableRow({ id, children, handleDelete }) {
       <tr>
         {children}
         <td className="d-flex">
-          <div style={{ cursor: "pointer", marginRight: "10px" }}>
-            <Iconify icon="ph:pencil" />
-          </div>
+          {edit && (
+            <Link
+              to={path}
+              className="text-secondary"
+              style={{ cursor: "pointer", marginRight: "10px" }}
+            >
+              <Iconify icon="ph:pencil" />
+            </Link>
+          )}
           <div
             onClick={handleShow}
             data-target="#exampleModalCenter"

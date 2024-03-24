@@ -14,17 +14,25 @@ const bgColorMap = {
   error: "rgba(201, 60, 70,0.4)",
 };
 
-const Iconify = ({ icon, width = 20, color, padding = "12px" }) => {
+const Iconify = ({
+  icon,
+  width = 20,
+  color,
+  padding = "12px",
+  style,
+  marginRight = "10px",
+}) => {
   return (
     <div
       style={{
+        ...style,
         borderRadius: "5px",
         backgroundColor: bgColorMap[color],
         backgroundOpacity: "0.5",
         padding,
         display: "flex",
         alignItems: "center",
-        marginRight: "10px",
+        marginRight,
       }}
     >
       <Icon height={width} width={width} icon={icon} color={colorMap[color]} />

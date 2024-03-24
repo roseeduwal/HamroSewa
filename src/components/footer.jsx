@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer>
+    <footer style={{ marginTop: "50px" }}>
       <div className="d-flex align-items-top justify-content-between bg-white p-3">
         <div>
           <div className="row">

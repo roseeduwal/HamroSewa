@@ -1,10 +1,13 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import LoadingButton from "../../../components/loading-button";
-import { useAddCategoryMutation } from "../../../hooks/useCategory";
+import {
+  useAddCategoryMutation,
+  useUpdateCategoryMutation,
+} from "../../../hooks/useCategory";
 import { useNavigate } from "react-router-dom";
 import { useSnackbar } from "notistack";
 
-export default function CategoryAddEditForm() {
+export default function CategoryAddEditForm({ formMode, defaultValue }) {
   const [categoryDetail, setCategoryDetail] = useState({
     categoryName: "",
   });
@@ -13,9 +16,12 @@ export default function CategoryAddEditForm() {
   const { enqueueSnackbar } = useSnackbar();
 
   const onSuccess = useCallback(() => {
-    enqueueSnackbar("Category add successful", { variant: "success" });
+    enqueueSnackbar(
+      `Category ${formMode === "Add" ? "add" : "update"} successful`,
+      { variant: "success" }
+    );
     navigate("/dashboard/categories");
-  }, [enqueueSnackbar, navigate]);
+  }, [enqueueSnackbar, navigate, formMode]);
 
   const onError = useCallback(
     (error) => {
@@ -34,12 +40,17 @@ export default function CategoryAddEditForm() {
     onError
   );
 
+  const { mutate: updateCategory, isLoading: updating } =
+    useUpdateCategoryMutation(onSuccess, onError);
+
   const handleSubmit = useCallback(
     (e) => {
       e.preventDefault();
-      addCategory(categoryDetail);
+      if (formMode === "Add") {
+        addCategory(categoryDetail);
+      } else updateCategory(categoryDetail, defaultValue.id);
     },
-    [addCategory, categoryDetail]
+    [addCategory, categoryDetail, formMode, updateCategory, defaultValue.id]
   );
 
   const handleChange = useCallback((e) => {
@@ -49,6 +60,11 @@ export default function CategoryAddEditForm() {
       [name]: value,
     }));
   }, []);
+
+  useEffect(() => {
+    if (formMode === "Add") return;
+    setCategoryDetail(defaultValue);
+  }, [formMode, defaultValue]);
 
   return (
     <form onSubmit={handleSubmit}>
@@ -67,11 +83,11 @@ export default function CategoryAddEditForm() {
         />
       </div>
       <LoadingButton
-        isLoading={isLoading}
+        isLoading={isLoading || updating}
         type="submit"
         style="btn btn-primary w-100 mt-3"
       >
-        Add Product
+        {formMode === "Add" ? "Add Product" : "Update Product"}
       </LoadingButton>
     </form>
   );

@@ -37,6 +37,18 @@ export default function Sidebar() {
       icon: <Iconify icon="tabler:category-filled" />,
       access: ["admin"],
     },
+    {
+      name: "Users",
+      path: "/dashboard/users",
+      icon: <Iconify icon="oui:users" />,
+      access: ["admin"],
+    },
+    {
+      name: "Professionals",
+      path: "/dashboard/professionals",
+      icon: <Iconify icon="pajamas:work" />,
+      access: ["admin"],
+    },
   ];
   return (
     <div className="col-2 p-2 d-flex flex-column">

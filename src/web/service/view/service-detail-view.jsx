@@ -11,7 +11,6 @@ export default function ServiceDetailView() {
   id;
   const { data: category, isLoading } = useFetchCategoryDetailQuery(id);
   const { data: cartItems } = useFetchCartItemQuery();
-
   if (isLoading) return <Loader />;
   return (
     <main>
@@ -21,7 +20,9 @@ export default function ServiceDetailView() {
             <p className="mt-4 fw-bold fs-2">{category.data.categoryName}</p>
             <div className="d-flex align-items-center">
               <i className="ph ph-star"></i>
-              <p className="fs-4 mb-0">4.5(30 Bookings)</p>
+              <p className="fs-4 mb-0">
+                {category.data.rating}({category.data.bookings} Bookings)
+              </p>
             </div>
           </div>
           <div className="col-9 slider imageslider">
@@ -122,6 +123,36 @@ export default function ServiceDetailView() {
 
           <div className=" col-4 mt-3 cartcolumn  ">
             <CartDetails cartItems={cartItems} />
+            <div className="row bg-white shadow rounded mt-4">
+              <div
+                className="p-3 scrollbar"
+                style={{ height: "200px", overflow: "auto" }}
+              >
+                <p className="fw-bold fs-2 m-0">Reviews</p>
+                {category?.data?.products.map((product, index) => (
+                  <div key={index}>
+                    <div>{product.productName}:</div>
+                    <div style={{ marginLeft: "20px" }}>
+                      {product.reviews.map((review) => (
+                        <div
+                          className="d-flex align-items-center"
+                          key={review.id}
+                        >
+                          ({" "}
+                          <Iconify
+                            marginRight="5px"
+                            padding="0"
+                            icon="fluent-emoji-flat:star"
+                          />
+                          <div>{review.rating}.0</div>)
+                          <div>{review.review}</div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
 
             <div className="row bg-white shadow rounded mt-4">
               <div className=" d-flex align-items-center cartdown">

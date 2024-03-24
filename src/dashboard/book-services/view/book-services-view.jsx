@@ -1,33 +1,104 @@
+import { useCallback } from "react";
 import Loader from "../../../components/loader";
+import TableRow from "../../../components/table-row";
 import { useAuthContext } from "../../../hooks/useAuthContext";
-import { useFetchBookingQuery } from "../../../hooks/useBooking";
+import {
+  useFetchBookingQuery,
+  useUpdateBookingMutation,
+} from "../../../hooks/useBooking";
+import { useFetchProfessionalQuery } from "../../../hooks/useUser";
 
 export default function BookServicesView() {
   const { user } = useAuthContext();
 
   const { data: bookings, isLoading } = useFetchBookingQuery(user.role);
+  const { data: professionals, isLoading: fetching } =
+    useFetchProfessionalQuery();
 
-  if (isLoading) return <Loader />;
+  const { mutate: updateBookingMutation } = useUpdateBookingMutation();
+
+  const updateBooking = useCallback(
+    (e, booking) => {
+      updateBookingMutation({
+        ...booking,
+        professionalId: +e.target.value,
+      });
+    },
+    [updateBookingMutation]
+  );
+
+  if (isLoading || fetching) return <Loader />;
   return (
     <div className="mt-4 rounded shadow p-4">
       <p className="fw-bold fs-3 p-2">Book Services</p>
 
-      {bookings.data.map((booking, index) => (
-        <div key={index} className="boxx p-4 d-flex justify-content-between">
-          <div className="">
-            {booking.bookingItems.map((item) => (
-              <p key={item.id}>{item?.product?.productName}</p>
-            ))}
-            <p>Ordered Time:{booking.bookingDate}</p>
-          </div>
+      <table className="table">
+        <thead>
+          <tr>
+            <th scope="col">S.N</th>
+            <th scope="col">Service</th>
+            <th scope="col">Total Services</th>
+            <th scope="col">Payment Mode</th>
+            <th>Booking Date</th>
+            {user.role === "Admin" && <th>Booked By</th>}
+            <th scope="col">Assigned User</th>
+            <th>Total Amount</th>
 
-          <div className="boxxx">
-            <p>Total Services:{booking.bookingItems.length} </p>
-            <p>Payment Method:Online</p>
-            <p>Total Amount:Rs {booking.subTotal}</p>
-          </div>
-        </div>
-      ))}
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {bookings?.data.map((booking, index) => (
+            <TableRow
+              id={booking.id}
+              key={index}
+              edit={false}
+              // handleDelete={deleteCategory}
+            >
+              <th scope="row">{index + 1}</th>
+              <td>
+                {booking.bookingItems.map((item, index) => (
+                  <div key={item.id}>
+                    {item.product.productName}{" "}
+                    {booking.bookingItems.length !== index + 1 && ","}
+                  </div>
+                ))}
+              </td>
+              <td>{booking?.bookingItems.length}</td>
+              <td>{booking?.payment?.paymentMode ?? "Cash on Delivery"}</td>
+              <td>{booking.bookingDate}</td>
+              {user.role === "Admin" && (
+                <td>{`${booking.user?.firstName} ${booking.user?.lastName}`}</td>
+              )}
+              <td>
+                {user.role === "Admin" ? (
+                  <select
+                    defaultValue={booking?.professional?.user?.firstName}
+                    defaultChecked
+                    onChange={(e) => updateBooking(e, booking)}
+                    id=""
+                  >
+                    <option>
+                      {booking?.professional?.user?.fullName ??
+                        "Select Professional"}
+                    </option>
+                    {professionals.data.map((professional) => (
+                      <option key={professional.id} value={professional.id}>
+                        {`${professional?.user?.firstName} ${
+                          professional?.user?.middleName ?? ""
+                        } ${professional?.user?.lastName}`}
+                      </option>
+                    ))}
+                  </select>
+                ) : (
+                  booking?.professional?.user.fullName ?? "-"
+                )}
+              </td>
+              <td>{booking.subTotal}</td>
+            </TableRow>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }

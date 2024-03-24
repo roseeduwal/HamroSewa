@@ -10,6 +10,17 @@ export function addService(productDetail) {
   });
 }
 
+export function updateService(productDetail) {
+  return api.patch(`products/${productDetail.id}`, productDetail.formData, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
+}
+
 export function deleteService(id) {
   return api.delete(`products/${id}`);
+}
+
+export function getServiceDetail(id) {
+  "id", id;
+  return api.get(`products/${id}`);
 }

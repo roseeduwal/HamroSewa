@@ -1,112 +1,218 @@
+import { useCallback, useState } from "react";
 import { useAuthContext } from "../../../hooks/useAuthContext";
+import {
+  useUpdateUserMutation,
+  useUploadUserImageMutation,
+} from "../../../hooks/useUser";
+import LoadingButton from "../../../components/loading-button";
+import { useSnackbar } from "notistack";
+import CircularLoader from "../../../components/circular-loader";
+import ChangePassword from "../change-password";
 
 export default function ProfileView() {
-  const { user } = useAuthContext();
+  const { user, dispatch } = useAuthContext();
+  const [userCredentials, setUserCredentials] = useState(user);
+  const { enqueueSnackbar } = useSnackbar();
+  const onSuccess = useCallback(
+    (data) => {
+      enqueueSnackbar("User updated successfully", { variant: "success" });
 
+      dispatch({ type: "UPDATE", payload: data.data });
+    },
+    [dispatch, enqueueSnackbar]
+  );
+
+  const onError = useCallback(
+    (error) => {
+      error;
+      enqueueSnackbar(
+        error?.response?.data?.message ?? "Something went wrong",
+        { variant: "error" }
+      );
+    },
+    [enqueueSnackbar]
+  );
+
+  const { mutate: updateUserMutation, isLoading } = useUpdateUserMutation(
+    onSuccess,
+    onError
+  );
+
+  const onUploadSuccess = useCallback(
+    (data) => {
+      enqueueSnackbar("Profile image uploaded successfully", {
+        variant: "success",
+      });
+
+      dispatch({ type: "UPDATE", payload: data.data });
+    },
+    [dispatch, enqueueSnackbar]
+  );
+
+  const onUploadError = useCallback(
+    (error) => {
+      error;
+      enqueueSnackbar(
+        error?.response?.data?.message ?? "Something went wrong",
+        { variant: "error" }
+      );
+    },
+    [enqueueSnackbar]
+  );
+
+  const { mutate: uploadImageMutation, isLoading: uploading } =
+    useUploadUserImageMutation(onUploadSuccess, onUploadError);
+
+  const uploadImage = (e) => {
+    const formData = new FormData();
+
+    const image = e.target.files[0];
+
+    formData.append("profileImageUrl", image);
+    uploadImageMutation({ id: user.id, profileImageUrl: formData });
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setUserCredentials((preVal) => ({
+      ...preVal,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
+      updateUserMutation(userCredentials);
+    },
+    [updateUserMutation, userCredentials]
+  );
   return (
     <div className="rounded mt-4 shadow p-4">
-      <div className="d-flex align-items-center userdiv mt-4">
-        <div className="mt-3  userphoto">
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png"
-            style={{ height: "100px", width: "100px", marginRight: "20px" }}
-            className="rounded-circle"
-            alt="Userphoto"
-          />
-        </div>
-        <div className="userdetails ">
+      <div className="d-flex align-items-center userdiv py-4">
+        {uploading ? (
+          <div
+            className="d-flex justify-content-center align-items-center rounded-circle border"
+            style={{
+              height: "100px",
+              width: "100px",
+              marginRight: "20px",
+            }}
+          >
+            <CircularLoader />
+          </div>
+        ) : (
+          <label htmlFor="profileImage">
+            <img
+              src={
+                user.profileImageUrl ??
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png"
+              }
+              style={{
+                height: "100px",
+                width: "100px",
+                marginRight: "20px",
+                cursor: "pointer",
+              }}
+              className="rounded-circle border"
+              alt="Userphoto"
+            />
+          </label>
+        )}
+        <input onChange={uploadImage} type="file" id="profileImage" hidden />
+        <div className="userdetails ml-4 mt-3">
           <p className="fw-bold">{`${user?.firstName} ${user?.lastName}`}</p>
           <p className="text-secondary">{user?.email}</p>
         </div>
       </div>
       <div className="row">
         <div className="col-6 mt-4 p-2">
-          <form className="p-2">
+          <form className="p-2" onSubmit={handleSubmit}>
             <p className="text-primary fw-bold fs-4">User Details</p>
             <div className="mb-3">
-              <label htmlFor="exampleInputEmail1" className="form-label">
-                Full Name
+              <label htmlFor="firstName" className="form-label">
+                First Name*
               </label>
               <input
-                value={`${user.firstName} ${user.middleName ?? ""} ${
-                  user.lastName
-                }`}
-                type="fullname"
+                type="firstName"
+                value={userCredentials.firstName}
+                onChange={handleChange}
                 className="form-control"
-                id="exampleInputfullname"
-                aria-describedby="fullnameHelp"
+                id="firstName"
+                name="firstName"
+                aria-describedby="nameHelp"
               />
             </div>
             <div className="mb-3">
-              <label htmlFor="exampleInputEmail1" className="form-label">
-                Email
+              <label htmlFor="middleName" className="form-label">
+                Middle Name
+              </label>
+              <input
+                type="middleName"
+                value={userCredentials.middleName}
+                onChange={handleChange}
+                className="form-control"
+                id="middleName"
+                name="middleName"
+                aria-describedby="nameHelp"
+              />
+            </div>
+
+            <div className="mb-3">
+              <label htmlFor="lastName" className="form-label">
+                Last Name*
+              </label>
+              <input
+                type="name"
+                value={userCredentials.lastName}
+                onChange={handleChange}
+                className="form-control"
+                id="lastName"
+                name="lastName"
+                aria-describedby="nameHelp"
+              />
+            </div>
+
+            <div className="mb-3">
+              <label htmlFor="contactNumber" className="form-label">
+                Contact Number*
+              </label>
+              <input
+                type="text"
+                value={userCredentials.contactNumber}
+                onChange={handleChange}
+                className="form-control"
+                id="contactNumber"
+                name="contactNumber"
+                aria-describedby="numberHelp"
+              />
+            </div>
+
+            <div className="mb-3">
+              <label htmlFor="email" className="form-label">
+                Email*
               </label>
               <input
                 type="email"
-                value={user.email}
+                value={userCredentials.email}
+                onChange={handleChange}
                 className="form-control"
-                id="exampleInputEmail1"
-                aria-describedby="emailHelp"
+                id="email"
+                name="email"
+                aria-describedby="addressHelp"
               />
             </div>
-            <div className="mb-3">
-              <label htmlFor="exampleInputEmail1" className="form-label">
-                Phone Number
-              </label>
-              <input
-                type="phonenumber"
-                value={user.contactNumber}
-                className="form-control"
-                id="exampleInputphonenumber"
-                aria-describedby="phonenumberHelp"
-              />
-            </div>
-            <button type="button" className="btn btn-primary">
-              Edit Profile
-            </button>
+            <LoadingButton
+              isLoading={isLoading}
+              type="submit"
+              style="btn btn-primary w-100 mt-3"
+            >
+              Update
+            </LoadingButton>
           </form>
         </div>
-        <div className="col-6 divpassword mt-4 p-2">
-          <form className="p-2">
-            <p className="text-primary fw-bold fs-4">Change password</p>
-            <div className="mb-3">
-              <label htmlFor="exampleInputEmail1" className="form-label">
-                Old Password
-              </label>
-              <input
-                type="OldPassword"
-                className="form-control"
-                id="exampleInputOldPassword"
-                aria-describedby="fullnameHelp"
-              />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="exampleInputEmail1" className="form-label">
-                New Password
-              </label>
-              <input
-                type="NewPassword"
-                className="form-control"
-                id="exampleInputNewPassword"
-                aria-describedby="fullnameHelp"
-              />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="exampleInputEmail1" className="form-label">
-                Confirm Password
-              </label>
-              <input
-                type="ConfirmPassword"
-                className="form-control"
-                id="exampleInputConfirmPassword"
-                aria-describedby="fullnameHelp"
-              />
-            </div>
-            <button type="submit" className="btn btn-primary">
-              Change Password
-            </button>
-          </form>
-        </div>
+        <ChangePassword />
       </div>
     </div>
   );

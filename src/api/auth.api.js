@@ -21,3 +21,7 @@ export function verifyEmail(token) {
     }
   );
 }
+
+export function changePassword(passwordInfo) {
+  return api.patch("auth/change-password", passwordInfo);
+}

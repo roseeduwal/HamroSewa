@@ -8,21 +8,32 @@ import { useSnackbar } from "notistack";
 
 export default function CheckoutView() {
   const [bookingDate, setBookingDate] = useState();
+  const [paymentMode, setPaymentMode] = useState("");
   const { data: cartItems, isLoading } = useFetchCartItemQuery();
 
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
 
-  const onSuccess = useCallback(() => {
-    enqueueSnackbar("Service add successful", { variant: "success" });
-    navigate("/dashboard/book-services");
-  }, [enqueueSnackbar, navigate]);
+  const onSuccess = useCallback(
+    (data) => {
+      if (paymentMode === "Online") {
+        window.open(data.data.payment_url);
+        return;
+      }
+
+      enqueueSnackbar("Service add successful", { variant: "success" });
+      navigate("/dashboard/book-services");
+    },
+    [enqueueSnackbar, navigate, paymentMode]
+  );
 
   const onError = useCallback(
     (error) => {
       error;
       enqueueSnackbar(
-        error?.response?.data?.message[0] ?? "Something went wrong",
+        Array.isArray(error?.response?.data?.message)
+          ? error?.response?.data?.message[0]
+          : error?.response?.data?.message,
         { variant: "error" }
       );
     },
@@ -33,7 +44,6 @@ export default function CheckoutView() {
     onError
   );
   const handleBooking = useCallback(() => {
-    ("sp");
     const bookingItems = cartItems?.data?.cartItems?.map((item) => ({
       quantity: item.quantity,
       price: item.totalPrice,
@@ -43,8 +53,9 @@ export default function CheckoutView() {
       subTotal: cartItems.data.subTotal,
       bookingDate,
       bookingItems,
+      paymentMode,
     });
-  }, [addBooking, cartItems, bookingDate]);
+  }, [addBooking, cartItems, bookingDate, paymentMode]);
 
   bookingDate;
 
@@ -102,13 +113,28 @@ export default function CheckoutView() {
 
         <div className=" col-4 mt-4 p-4 BookD ">
           <p className="fs-4 text-center">Book Your Date</p>
-          <div htmlFor="bookingDate" className="d-flex justify-content-center">
+          <div
+            htmlFor="bookingDate"
+            className="d-flex direction justify-content-center"
+          >
             <input
               onChange={(e) => setBookingDate(e.target.value)}
               value={bookingDate}
               type="date"
               name="bookingDate"
             />
+          </div>
+          <p className="fs-4 text-center mt-4">Payment Mode</p>
+          <div className="d-flex direction justify-content-center ">
+            <select
+              onChange={(e) => setPaymentMode(e.target.value)}
+              name="paymentMode"
+              id=""
+            >
+              <option value="">Select One</option>
+              <option value="Online">Khalti</option>
+              <option value="Cash on Delivery'">Cash on delivery</option>
+            </select>
           </div>
         </div>
       </div>

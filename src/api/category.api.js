@@ -12,6 +12,10 @@ export const addCategory = (categoryDetail) => {
   return api.post("categories", categoryDetail);
 };
 
+export const updateCategory = (categoryDetail) => {
+  return api.patch(`categories/${categoryDetail.id}`, categoryDetail);
+};
+
 export const deleteCategory = (id) => {
   return api.delete(`categories/${id}`);
 };

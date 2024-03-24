@@ -10,6 +10,12 @@ export const authReducer = (state, action) => {
         isLoggedIn: true,
       };
 
+    case "UPDATE":
+      return {
+        user: action.payload,
+        isLoggedIn: state.isLoggedIn,
+      };
+
     case "LOGOUT":
       return {
         user: null,
