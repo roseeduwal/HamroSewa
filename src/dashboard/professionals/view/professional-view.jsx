@@ -8,7 +8,7 @@ export default function ProfessionalView() {
   if (isLoading) return <Loader />;
   return (
     <div className="mt-4 rounded shadow p-4">
-      <p className="fw-bold fs-3 p-2">Book Services</p>
+      <h3 className="">Professionals</h3>
 
       <table className="table">
         <thead>

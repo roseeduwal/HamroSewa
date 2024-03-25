@@ -1,22 +1,21 @@
-import { useCallback, useState } from "react";
+import { useCallback, useState, useEffect } from "react";
 import Iconify from "./iconify";
 import LoadingButton from "./loading-button";
 import { useSnackbar } from "notistack";
-import { useNavigate } from "react-router-dom";
 import { useAddReviewMutation } from "../hooks/useReview";
+import { useQueryClient } from "react-query";
 
 const ReviewModal = ({ showModal, handleClose, productId }) => {
   const [rating, setRating] = useState(0);
   const [review, setReview] = useState("");
+  const queryClient = useQueryClient();
 
-  const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
 
   const onSuccess = useCallback(() => {
-    enqueueSnackbar("User logged in successfully", { variant: "success" });
-
-    navigate("/dashboard/profile");
-  }, [enqueueSnackbar, navigate]);
+    queryClient.invalidateQueries("categories");
+    handleClose();
+  }, [handleClose, queryClient]);
 
   const onError = useCallback(
     (error) => {
@@ -38,6 +37,26 @@ const ReviewModal = ({ showModal, handleClose, productId }) => {
     },
     [addReview, productId, review, rating]
   );
+
+  useEffect(() => {
+    if (showModal) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+
+    return () => {
+      document.body.style.overflow = "unset";
+      setRating(0);
+    };
+  }, [showModal]);
+
+  const handleBackgroundClick = (e) => {
+    if (e.target === e.currentTarget) {
+      handleClose();
+    }
+  };
+
   return (
     <>
       {showModal && (
@@ -46,13 +65,14 @@ const ReviewModal = ({ showModal, handleClose, productId }) => {
           style={{
             height: "100vh",
             width: "100vw",
-            position: "absolute",
+            position: "fixed",
             zIndex: 1,
             left: "0%",
             top: "0%",
+            overflowY: "auto",
             backgroundColor: "rgba(64, 61, 61,.5)",
           }}
-          //   onClick={handleClose}
+          onClick={handleBackgroundClick}
         >
           <div className="modal-overlay rounded bg-white p-4 shadow">
             <div className="modal-content" onClick={(e) => e.stopPropagation()}>

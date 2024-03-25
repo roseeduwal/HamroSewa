@@ -1,4 +1,4 @@
-export default function ProductCard({ name, description, price, image, home }) {
+export default function ProductCard({ name, price, image }) {
   return (
     <div className="col-lg-3">
       <div className="card border-0 shadow ">
@@ -10,12 +10,8 @@ export default function ProductCard({ name, description, price, image, home }) {
         />
         <div className="card-body">
           <h4 className="card-title">{name}</h4>
-          <p className="card-text">{description}</p>
-          {home && (
-            <a href="#" className="btn btn-primary">
-              Rs. {price}
-            </a>
-          )}
+          {/* <p className="card-text">{description}</p> */}
+          <div className="text-primary">Rs. {price}</div>
         </div>
       </div>
     </div>

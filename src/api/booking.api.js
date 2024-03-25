@@ -12,3 +12,7 @@ export const updateBooking = (booking) => {
   console.log(booking);
   return api.patch(`bookings/${booking.id}`, booking);
 };
+
+export const deleteBooking = (id) => {
+  return api.delete(`bookings/${id}`);
+};

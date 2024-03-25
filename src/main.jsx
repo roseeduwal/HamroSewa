@@ -29,6 +29,9 @@ import EditService from "./dashboard/services/edit-service.jsx";
 import UserView from "./dashboard/users/view/user-view.jsx";
 import ProfessionalView from "./dashboard/professionals/view/professional-view.jsx";
 import ValidatePurchase from "./web/purchase/validate-purchase.jsx";
+import PaymentView from "./dashboard/payments/view/payment-view.jsx";
+import ContactUsView from "./web/contact-us/view/contact-us-view.jsx";
+import MessageView from "./dashboard/messages/view/message-view.jsx";
 
 const router = createBrowserRouter([
   {
@@ -60,6 +63,10 @@ const router = createBrowserRouter([
       {
         path: "/about-us",
         element: <AboutUs />,
+      },
+      {
+        path: "/contact-us",
+        element: <ContactUsView />,
       },
       {
         path: "/login",
@@ -98,12 +105,20 @@ const router = createBrowserRouter([
             element: <ServicesView />,
           },
           {
+            path: "messages",
+            element: <MessageView />,
+          },
+          {
             path: "users",
             element: <UserView />,
           },
           {
             path: "professionals",
             element: <ProfessionalView />,
+          },
+          {
+            path: "payments",
+            element: <PaymentView />,
           },
           {
             path: "services/edit/:id",

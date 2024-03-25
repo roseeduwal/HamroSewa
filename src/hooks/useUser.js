@@ -1,5 +1,6 @@
 import { useMutation, useQuery } from "react-query";
 import {
+  deleteUser,
   fetchMe,
   fetchProfessional,
   fetchUsers,
@@ -36,4 +37,8 @@ export const useUpdateUserMutation = (onSuccess, onError) => {
 
 export const useUploadUserImageMutation = (onSuccess, onError) => {
   return useMutation({ mutationFn: uploadImage, onError, onSuccess });
+};
+
+export const useDeleteUserMutation = (onSuccess, onError) => {
+  return useMutation({ mutationFn: deleteUser, onError, onSuccess });
 };

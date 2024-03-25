@@ -49,6 +49,18 @@ export default function Sidebar() {
       icon: <Iconify icon="pajamas:work" />,
       access: ["admin"],
     },
+    {
+      name: "Payments",
+      path: "/dashboard/payments",
+      icon: <Iconify icon="tabler:coin-filled" />,
+      access: ["admin"],
+    },
+    {
+      name: "Messages",
+      path: "/dashboard/messages",
+      icon: <Iconify icon="wpf:message" />,
+      access: ["admin"],
+    },
   ];
   return (
     <div className="col-2 p-2 d-flex flex-column">

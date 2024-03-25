@@ -19,8 +19,8 @@ export default function Navbar() {
       path: "/about-us",
     },
     {
-      name: "Blog",
-      path: "/blog",
+      name: "Contact Us",
+      path: "/contact-us",
     },
   ];
   const { user, isLoggedIn } = useAuthContext();

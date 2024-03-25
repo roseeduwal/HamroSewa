@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from "react-query";
 import {
   createBooking,
+  deleteBooking,
   fetchBookings,
   updateBooking,
 } from "../api/booking.api";
@@ -18,4 +19,8 @@ export const useFetchBookingQuery = (userType) => {
     refetchOnWindowFocus: false,
     retry: 1,
   });
+};
+
+export const useDeleteBookingMutation = (onSuccess, onError) => {
+  return useMutation({ mutationFn: deleteBooking, onError, onSuccess });
 };

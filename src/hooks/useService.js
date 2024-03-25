@@ -25,6 +25,7 @@ export const useUpdateServiceMutation = (onSuccess, onError) => {
 export const useDeleteServiceMutation = (onSuccess, onError) => {
   return useMutation({ mutationFn: deleteService, onError, onSuccess });
 };
+
 export const useGetServiceDetailMutation = (id) => {
   return useQuery(["services", id], () => getServiceDetail(id), {
     refetchOnWindowFocus: false,

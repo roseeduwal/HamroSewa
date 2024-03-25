@@ -11,7 +11,6 @@ export default function RegisterView() {
   const [viewPassword, setViewPassword] = useState(false);
   const [userCredentials, setUserCredentials] = useState({
     firstName: "",
-    middleName: "",
     lastName: "",
     contactNumber: "",
     email: "",
@@ -91,8 +90,31 @@ export default function RegisterView() {
             }}
           />
         </div>
-        <div className="col-6">
-          <form className="bg-white  p-5" onSubmit={handleSubmit}>
+        <div className="col-6 ">
+          <h5 className="text-center">Select User Type</h5>
+          <div className="d-flex p-4 justify-content-center  align-items-center">
+            <div
+              onClick={() => setUserType("Professional")}
+              style={{ cursor: "pointer" }}
+              className={`cursor-pointer m-2 user-type ${
+                userType === "Professional"
+                  ? "bg-primary text-white"
+                  : "bg-white"
+              }  px-5 py-3 rounded`}
+            >
+              Professional
+            </div>
+            <div
+              onClick={() => setUserType("User")}
+              style={{ cursor: "pointer" }}
+              className={`cursor-pointer user-type ${
+                userType === "User" ? "bg-primary text-white" : "bg-white"
+              }  px-5 py-3 rounded`}
+            >
+              User
+            </div>
+          </div>
+          <form className="rounded shadow p-5" onSubmit={handleSubmit}>
             <h3 className="fs-4 fw-bold mb-4">
               Join Hamro Sewa to change your Life
             </h3>
@@ -112,7 +134,7 @@ export default function RegisterView() {
               />
             </div>
 
-            <div className="mb-3">
+            {/* <div className="mb-3">
               <label htmlFor="middleName" className="form-label">
                 Middle Name
               </label>
@@ -125,7 +147,7 @@ export default function RegisterView() {
                 name="middleName"
                 aria-describedby="nameHelp"
               />
-            </div>
+            </div> */}
 
             <div className="mb-3">
               <label htmlFor="lastName" className="form-label">
@@ -198,28 +220,6 @@ export default function RegisterView() {
                     />
                   )}
                 </span>
-              </div>
-            </div>
-            <div className="d-flex justify-content-start align-items-center">
-              <div
-                onClick={() => setUserType("Professional")}
-                style={{ cursor: "pointer" }}
-                className={`cursor-pointer ${
-                  userType === "Professional"
-                    ? "bg-primary text-white"
-                    : "bg-white"
-                }  px-5 py-3 rounded`}
-              >
-                Professional
-              </div>
-              <div
-                onClick={() => setUserType("User")}
-                style={{ cursor: "pointer" }}
-                className={`cursor-pointer ${
-                  userType === "User" ? "bg-primary text-white" : "bg-white"
-                }  px-5 py-3 rounded`}
-              >
-                User
               </div>
             </div>
 

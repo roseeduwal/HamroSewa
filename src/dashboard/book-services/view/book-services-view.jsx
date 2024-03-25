@@ -3,17 +3,44 @@ import Loader from "../../../components/loader";
 import TableRow from "../../../components/table-row";
 import { useAuthContext } from "../../../hooks/useAuthContext";
 import {
+  useDeleteBookingMutation,
   useFetchBookingQuery,
   useUpdateBookingMutation,
 } from "../../../hooks/useBooking";
 import { useFetchProfessionalQuery } from "../../../hooks/useUser";
+import { useSnackbar } from "notistack";
+import { useQueryClient } from "react-query";
 
 export default function BookServicesView() {
   const { user } = useAuthContext();
 
+  const queryClient = useQueryClient();
+
+  const { enqueueSnackbar } = useSnackbar();
+
+  const onSuccess = useCallback(() => {
+    enqueueSnackbar("Booking delete successfully", { variant: "success" });
+    queryClient.invalidateQueries("bookings");
+  }, [enqueueSnackbar, queryClient]);
+
+  const onError = useCallback(
+    (error) => {
+      error;
+      enqueueSnackbar(
+        error?.response?.data?.message ?? "Something went wrong",
+        { variant: "error" }
+      );
+    },
+    [enqueueSnackbar]
+  );
+
   const { data: bookings, isLoading } = useFetchBookingQuery(user.role);
   const { data: professionals, isLoading: fetching } =
     useFetchProfessionalQuery();
+  const { mutate: deleteBooking } = useDeleteBookingMutation(
+    onSuccess,
+    onError
+  );
 
   const { mutate: updateBookingMutation } = useUpdateBookingMutation();
 
@@ -27,11 +54,17 @@ export default function BookServicesView() {
     [updateBookingMutation]
   );
 
+  const handleDelete = useCallback(
+    (id) => {
+      deleteBooking(id);
+    },
+    [deleteBooking]
+  );
+
   if (isLoading || fetching) return <Loader />;
   return (
     <div className="mt-4 rounded shadow p-4">
-      <p className="fw-bold fs-3 p-2">Book Services</p>
-
+      <h3 className="">Book Services</h3>
       <table className="table">
         <thead>
           <tr>
@@ -53,7 +86,7 @@ export default function BookServicesView() {
               id={booking.id}
               key={index}
               edit={false}
-              // handleDelete={deleteCategory}
+              handleDelete={handleDelete}
             >
               <th scope="row">{index + 1}</th>
               <td>
@@ -68,7 +101,9 @@ export default function BookServicesView() {
               <td>{booking?.payment?.paymentMode ?? "Cash on Delivery"}</td>
               <td>{booking.bookingDate}</td>
               {user.role === "Admin" && (
-                <td>{`${booking.user?.firstName} ${booking.user?.lastName}`}</td>
+                <td>{`${booking.user?.firstName ?? ""} ${
+                  booking.user?.lastName ?? ""
+                }`}</td>
               )}
               <td>
                 {user.role === "Admin" ? (

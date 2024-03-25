@@ -29,7 +29,6 @@ export default function CheckoutView() {
 
   const onError = useCallback(
     (error) => {
-      error;
       enqueueSnackbar(
         Array.isArray(error?.response?.data?.message)
           ? error?.response?.data?.message[0]
@@ -133,7 +132,7 @@ export default function CheckoutView() {
             >
               <option value="">Select One</option>
               <option value="Online">Khalti</option>
-              <option value="Cash on Delivery'">Cash on delivery</option>
+              <option value="Cash on Delivery">Cash on delivery</option>
             </select>
           </div>
         </div>

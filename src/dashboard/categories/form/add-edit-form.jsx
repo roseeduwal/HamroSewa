@@ -50,7 +50,7 @@ export default function CategoryAddEditForm({ formMode, defaultValue }) {
         addCategory(categoryDetail);
       } else updateCategory(categoryDetail, defaultValue.id);
     },
-    [addCategory, categoryDetail, formMode, updateCategory, defaultValue.id]
+    [addCategory, categoryDetail, formMode, updateCategory, defaultValue?.id]
   );
 
   const handleChange = useCallback((e) => {

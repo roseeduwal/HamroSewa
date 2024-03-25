@@ -1,14 +1,49 @@
+import { useCallback } from "react";
 import Loader from "../../../components/loader";
 import TableRow from "../../../components/table-row";
-import { useFetchUsersQuery } from "../../../hooks/useUser";
+import {
+  useDeleteUserMutation,
+  useFetchUsersQuery,
+} from "../../../hooks/useUser";
+import { useSnackbar } from "notistack";
+import { useQueryClient } from "react-query";
 
 export default function UserView() {
   const { data: users, isLoading } = useFetchUsersQuery("user");
 
+  const queryClient = useQueryClient();
+
+  const { enqueueSnackbar } = useSnackbar();
+
+  const onSuccess = useCallback(() => {
+    enqueueSnackbar("User delete successfully", { variant: "success" });
+    queryClient.invalidateQueries("users");
+  }, [enqueueSnackbar, queryClient]);
+
+  const onError = useCallback(
+    (error) => {
+      error;
+      enqueueSnackbar(
+        error?.response?.data?.message ?? "Something went wrong",
+        { variant: "error" }
+      );
+    },
+    [enqueueSnackbar]
+  );
+
+  const { mutate: deleteUser } = useDeleteUserMutation(onSuccess, onError);
+
+  const handleDelete = useCallback(
+    (id) => {
+      deleteUser(id);
+    },
+    [deleteUser]
+  );
+
   if (isLoading) return <Loader />;
   return (
     <div className="mt-4 rounded shadow p-4">
-      <p className="fw-bold fs-3 p-2">Book Services</p>
+      <h3 className="">Users</h3>
 
       <table className="table">
         <thead>
@@ -28,7 +63,7 @@ export default function UserView() {
               id={user.id}
               key={index}
               edit={false}
-              // handleDelete={deleteCategory}
+              handleDelete={handleDelete}
             >
               <th scope="row">{index + 1}</th>
               <td>{`${user.firstName} ${user.middleName ?? ""} ${

@@ -13,11 +13,14 @@ export const fetchProfessional = () => {
 };
 
 export const updateUser = (userDetail) => {
-  return api.patch(`users/${userDetail.id}`, userDetail);
+  return api.patch(`users`, userDetail);
+};
+
+export const deleteUser = (id) => {
+  return api.delete(`users/${id}`);
 };
 
 export const uploadImage = (userDetail) => {
-  console.log(userDetail);
   return api.patch(
     `users/upload/${userDetail.id}`,
     userDetail.profileImageUrl,
