@@ -12,7 +12,6 @@ export default function ValidatePurchase() {
   const { enqueueSnackbar } = useSnackbar();
 
   const onSuccess = useCallback(() => {
-    console.log("sup");
     enqueueSnackbar("Payment successful", { variant: "success" });
 
     navigate("/dashboard/book-services");
