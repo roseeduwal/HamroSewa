@@ -23,7 +23,7 @@ export default function Sidebar() {
       name: "Booked Services",
       path: "/dashboard/book-services",
       icon: <Iconify icon="fluent-emoji-high-contrast:shopping-cart" />,
-      access: ["user", "admin", "professional"],
+      access: ["user", "admin"],
     },
     {
       name: "My Reviews",
@@ -60,6 +60,12 @@ export default function Sidebar() {
       path: "/dashboard/messages",
       icon: <Iconify icon="wpf:message" />,
       access: ["admin"],
+    },
+    {
+      name: "Assigned Work",
+      path: "/dashboard/assigned",
+      icon: <Iconify icon="mdi:tag-outline" />,
+      access: ["professional"],
     },
   ];
   return (

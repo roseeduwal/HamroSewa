@@ -32,6 +32,10 @@ import ValidatePurchase from "./web/purchase/validate-purchase.jsx";
 import PaymentView from "./dashboard/payments/view/payment-view.jsx";
 import ContactUsView from "./web/contact-us/view/contact-us-view.jsx";
 import MessageView from "./dashboard/messages/view/message-view.jsx";
+import AssignedView from "./dashboard/assigned/view/assigned-view.jsx";
+import { DropdownContextProvider } from "./context/dropdown-context.jsx";
+import ForgotPasswordView from "./web/auth/forgot-password/forgot-password-view.jsx";
+import ResetPasswordView from "./web/auth/forgot-password/change-password.jsx";
 
 const router = createBrowserRouter([
   {
@@ -73,12 +77,20 @@ const router = createBrowserRouter([
         element: <LoginView />,
       },
       {
-        path: "/auth/verify-email",
+        path: "/verify-email",
         element: <VerifyEmail />,
       },
       {
         path: "/register",
         element: <RegisterView />,
+      },
+      {
+        path: "/forgot-password",
+        element: <ForgotPasswordView />,
+      },
+      {
+        path: "/reset-password",
+        element: <ResetPasswordView />,
       },
       {
         path: "/dashboard",
@@ -136,6 +148,10 @@ const router = createBrowserRouter([
             path: "my-reviews",
             element: <MyReviewsView />,
           },
+          {
+            path: "assigned",
+            element: <AssignedView />,
+          },
         ],
       },
     ],
@@ -146,14 +162,16 @@ const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <SnackbarProvider>
-      <QueryClientProvider client={queryClient}>
-        <AuthContextProvider>
-          <CartContextProvider>
-            <RouterProvider router={router} />
-          </CartContextProvider>
-        </AuthContextProvider>
-      </QueryClientProvider>
-    </SnackbarProvider>
+    <DropdownContextProvider>
+      <SnackbarProvider>
+        <QueryClientProvider client={queryClient}>
+          <AuthContextProvider>
+            <CartContextProvider>
+              <RouterProvider router={router} />
+            </CartContextProvider>
+          </AuthContextProvider>
+        </QueryClientProvider>
+      </SnackbarProvider>
+    </DropdownContextProvider>
   </React.StrictMode>
 );

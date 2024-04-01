@@ -2,7 +2,7 @@ import { useCallback, useState } from "react";
 import LoadingButton from "../../../components/loading-button";
 import { useSignUpMutation } from "../../../hooks/useAuth";
 import { useSnackbar } from "notistack";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useFetchCategoryQuery } from "../../../hooks/useCategory";
 import Iconify from "../../../components/iconify";
 
@@ -81,7 +81,11 @@ export default function RegisterView() {
       <div className="row mt-4">
         <div className="col-6 d-flex align-items-center justify-content-center">
           <img
-            src="https://firebasestorage.googleapis.com/v0/b/shop-a6a23.appspot.com/o/register%2Fprofessionals.png?alt=media&token=3adec4f7-f8c4-47a6-88bb-54636ac9b255"
+            src={
+              userType === "User"
+                ? "https://firebasestorage.googleapis.com/v0/b/shop-a6a23.appspot.com/o/register%2Flogin.png?alt=media&token=6e98f461-14bd-4e3f-b5e0-09e7a65e12d8"
+                : "https://firebasestorage.googleapis.com/v0/b/shop-a6a23.appspot.com/o/register%2Fprofessionals.png?alt=media&token=3adec4f7-f8c4-47a6-88bb-54636ac9b255"
+            }
             style={{
               height: "500px",
               width: "500px",
@@ -92,7 +96,7 @@ export default function RegisterView() {
         </div>
         <div className="col-6 ">
           <h5 className="text-center">Select User Type</h5>
-          <div className="d-flex p-4 justify-content-center  align-items-center">
+          <div className="d-flex p-2 justify-content-center  align-items-center">
             <div
               onClick={() => setUserType("Professional")}
               style={{ cursor: "pointer" }}
@@ -251,6 +255,12 @@ export default function RegisterView() {
             >
               Register
             </LoadingButton>
+            <div className="d-flex justify-content-center mt-3">
+              <p>Already Have an account?</p>
+              <Link to="/login" className="link ms-3">
+                Login Now
+              </Link>
+            </div>
           </form>
         </div>
       </div>

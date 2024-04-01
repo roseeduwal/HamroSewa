@@ -9,10 +9,17 @@ export const fetchBookings = (userType = "") => {
 };
 
 export const updateBooking = (booking) => {
-  console.log(booking);
   return api.patch(`bookings/${booking.id}`, booking);
+};
+
+export const updateBookingStatus = (booking) => {
+  return api.patch(`bookings/status/${booking.id}`, booking);
 };
 
 export const deleteBooking = (id) => {
   return api.delete(`bookings/${id}`);
+};
+
+export const fetchAssignedBooking = () => {
+  return api.get("bookings/assigned");
 };

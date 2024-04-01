@@ -3,6 +3,8 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import { useSignOutMutation } from "../hooks/useAuth";
 import { useCallback } from "react";
 import { useSnackbar } from "notistack";
+import DropDown from "./drop-down";
+import { useDropdownContext } from "../hooks/useDropdownContext";
 
 export default function Navbar() {
   const paths = [
@@ -23,8 +25,9 @@ export default function Navbar() {
       path: "/contact-us",
     },
   ];
-  const { user, isLoggedIn } = useAuthContext();
+  const { isLoggedIn } = useAuthContext();
   const { dispatch } = useAuthContext();
+  const { dispatch: dropdownAction } = useDropdownContext();
 
   const navigate = useNavigate();
 
@@ -93,18 +96,41 @@ export default function Navbar() {
                 </li>
               ))}
             </ul>
+
             {isLoggedIn ? (
               <>
-                <div>{user?.firstName}</div>
-                <Link className="btn" to="/dashboard/profile">
-                  Dashboard
-                </Link>
-                <div
-                  style={{ cursor: "pointer" }}
-                  onClick={() => signOutMutation()}
-                >
-                  Logout
-                </div>
+                <DropDown>
+                  <div
+                    style={{
+                      position: "absolute",
+                      right: 10,
+                      width: "100px",
+                      textAlign: "center",
+                    }}
+                  >
+                    <div
+                      className="bg-white rounded shadow p-1"
+                      onClick={() => dropdownAction({ type: "OPEN" })}
+                    >
+                      <Link
+                        className="btn dropdown-items"
+                        to="/dashboard/profile"
+                      >
+                        Profile
+                      </Link>
+                      <div
+                        className="dropdown-items rounded"
+                        style={{
+                          cursor: "pointer",
+                          padding: "6px 12px",
+                        }}
+                        onClick={() => signOutMutation()}
+                      >
+                        Logout
+                      </div>
+                    </div>
+                  </div>
+                </DropDown>
               </>
             ) : (
               <>

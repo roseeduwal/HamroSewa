@@ -1,9 +1,11 @@
 import { useMutation } from "react-query";
 import {
   changePassword,
+  forgotPassword,
   login,
   logout,
   register,
+  resetPassword,
   verifyEmail,
 } from "../api/auth.api";
 
@@ -13,6 +15,10 @@ export const useLoginMutation = (onSuccess, onError) => {
 
 export const useSignUpMutation = (onSuccess, onError) => {
   return useMutation({ mutationFn: register, onError, onSuccess });
+};
+
+export const useForgotPasswordMutation = (onSuccess, onError) => {
+  return useMutation({ mutationFn: forgotPassword, onError, onSuccess });
 };
 
 export const useSignOutMutation = (onSuccess, onError) => {
@@ -25,4 +31,8 @@ export const useVerifyEmailMutation = (onSuccess, onError) => {
 
 export const useUpdatePasswordMutation = (onSuccess, onError) => {
   return useMutation({ mutationFn: changePassword, onError, onSuccess });
+};
+
+export const useResetPasswordMutation = (onSuccess, onError) => {
+  return useMutation({ mutationFn: resetPassword, onError, onSuccess });
 };

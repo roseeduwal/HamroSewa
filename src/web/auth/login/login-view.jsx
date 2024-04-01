@@ -139,25 +139,30 @@ export default function LoginView() {
                 Login
               </LoadingButton>
               <div className="d-flex justify-content-center mt-3">
+                <Link to="/forgot-password" className="link ms-3">
+                  Forgot Password?
+                </Link>
+              </div>
+              <div className="d-flex justify-content-center mt-3">
                 <p>Don’t have an account? </p>
                 <Link to="/register" className="link ms-3">
                   Register Now
                 </Link>
               </div>
-              <div className="title position-relative border-bottom border-black">
+              {/* <div className="title position-relative border-bottom border-black">
                 <span
                   className="position-absolute px-3 bg-white "
                   style={{ top: "-12px", left: "46%" }}
                 >
                   OR
                 </span>
-              </div>
-              <div className="text-center mt-3">
+              </div> */}
+              {/* <div className="text-center mt-3">
                 <p>Login With:</p>
               </div>
               <div className="d-flex justify-content-center mt-3" />
               <i className="ph ph-google-logo fs-1 fw-bold"></i>
-              <i className="ph ph-facebook-logo fs-1 fw-bold"></i>
+              <i className="ph ph-facebook-logo fs-1 fw-bold"></i> */}
             </form>
           </div>
         </div>
