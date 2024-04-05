@@ -1,8 +1,10 @@
 import { useRouteError } from "react-router-dom";
+import PageNotFound from "./components/page-not-found";
 
 export default function ErrorPage() {
   const error = useRouteError();
-  console.error(error);
+
+  if (error.status === 404) return <PageNotFound />;
 
   return (
     <div id="error-page">
