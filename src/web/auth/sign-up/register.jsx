@@ -15,6 +15,7 @@ export default function RegisterView() {
     contactNumber: "",
     email: "",
     password: "",
+    address: "",
     profession: 0,
   });
 
@@ -179,6 +180,21 @@ export default function RegisterView() {
                 className="form-control"
                 id="contactNumber"
                 name="contactNumber"
+                aria-describedby="numberHelp"
+              />
+            </div>
+
+            <div className="mb-3">
+              <label htmlFor="address" className="form-label">
+                Address*
+              </label>
+              <input
+                type="text"
+                value={userCredentials.address}
+                onChange={handleChange}
+                className="form-control"
+                id="address"
+                name="address"
                 aria-describedby="numberHelp"
               />
             </div>

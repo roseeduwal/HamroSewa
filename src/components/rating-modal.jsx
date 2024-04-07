@@ -76,13 +76,21 @@ const ReviewModal = ({ showModal, handleClose, productId }) => {
         >
           <div className="modal-overlay rounded bg-white p-4 shadow">
             <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-              <span
-                style={{ cursor: "pointer" }}
-                className="close-button"
-                onClick={handleClose}
-              >
-                ×
-              </span>
+              <div className="d-flex justify-content-end">
+                <span
+                  style={{ cursor: "pointer", borderRadius: "30px" }}
+                  className="close-button bg-primary p-1"
+                  onClick={handleClose}
+                >
+                  <Iconify
+                    style={{ color: "white" }}
+                    icon="icomoon-free:cross"
+                    padding="0"
+                    marginRight="0"
+                    width="15px"
+                  />
+                </span>
+              </div>
               <h6>Write a review</h6>
             </div>
             <div className="d-flex justify-content-start align-items-center">

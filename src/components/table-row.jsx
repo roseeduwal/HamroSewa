@@ -3,7 +3,14 @@ import CustomModal from "./modal";
 import Iconify from "./iconify";
 import { Link } from "react-router-dom";
 
-export default function TableRow({ id, children, handleDelete, edit, path }) {
+export default function TableRow({
+  id,
+  children,
+  handleDelete,
+  edit,
+  path,
+  hideDelete,
+}) {
   const [showModal, setShowModal] = useState(false);
 
   const handleClose = () => {
@@ -31,14 +38,16 @@ export default function TableRow({ id, children, handleDelete, edit, path }) {
               <Iconify icon="ph:pencil" />
             </Link>
           )}
-          <div
-            onClick={handleShow}
-            data-target="#exampleModalCenter"
-            data-toggle="modal"
-            style={{ cursor: "pointer" }}
-          >
-            <Iconify icon="ph:trash" />
-          </div>
+          {!hideDelete && (
+            <div
+              onClick={handleShow}
+              data-target="#exampleModalCenter"
+              data-toggle="modal"
+              style={{ cursor: "pointer" }}
+            >
+              <Iconify icon="ph:trash" />
+            </div>
+          )}
         </td>
       </tr>
       <CustomModal

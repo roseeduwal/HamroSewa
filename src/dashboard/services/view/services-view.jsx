@@ -72,6 +72,7 @@ export default function ServicesView() {
           <tbody>
             {services?.data?.map((service, index) => (
               <TableRow
+                hideDelete={true}
                 path={`edit/${service.id}`}
                 edit={true}
                 id={service.id}

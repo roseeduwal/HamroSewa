@@ -57,13 +57,16 @@ export default function AssignedView() {
             <th>Booking Date</th>
             <th scope="col">Sub Total</th>
             <th>Status</th>
-
-            <th scope="col">Action</th>
           </tr>
         </thead>
         <tbody>
           {assignedBookings?.data.map((assignedBooking, index) => (
-            <TableRow id={assignedBooking.id} key={index} edit={false}>
+            <TableRow
+              hideAction
+              id={assignedBooking.id}
+              key={index}
+              edit={false}
+            >
               <th scope="row">{index + 1}</th>
               <td>
                 {assignedBooking.bookingItems.map((item, index) => (
@@ -91,7 +94,6 @@ export default function AssignedView() {
                   <option value="Pending">Pending</option>
                 </select>
               </td>
-              <td>{assignedBooking.bookingStatus}</td>
             </TableRow>
           ))}
         </tbody>

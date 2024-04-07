@@ -61,6 +61,7 @@ export default function CategoryView() {
         <tbody>
           {categories?.data.map((category, index) => (
             <TableRow
+              hideDelete={true}
               path={`edit/${category.id}`}
               edit={true}
               id={category.id}

@@ -42,11 +42,16 @@ export default function ResetPasswordView() {
 
   const onError = useCallback(
     (error) => {
-      error;
-      enqueueSnackbar(
-        error?.response?.data?.message ?? "Something went wrong",
-        { variant: "error" }
-      );
+      if (error?.response?.status === 400) {
+        if (Array.isArray(error?.response?.data?.message)) {
+          error.response.data.message;
+          enqueueSnackbar(error.response.data.message[0], {
+            variant: "error",
+          });
+        } else {
+          enqueueSnackbar(error?.response?.data?.message, { variant: "error" });
+        }
+      }
     },
     [enqueueSnackbar]
   );
@@ -68,12 +73,17 @@ export default function ResetPasswordView() {
   const handleSubmit = useCallback(
     (e) => {
       e.preventDefault();
+      if (passwordInfo.newPassword !== passwordInfo.confirmPassword) {
+        enqueueSnackbar("Password do not match", { variant: "error" });
+        return;
+      }
+
       resetPasswordMutation({
         token: searchParams.get("token"),
         ...passwordInfo,
       });
     },
-    [resetPasswordMutation, passwordInfo, searchParams]
+    [resetPasswordMutation, passwordInfo, searchParams, enqueueSnackbar]
   );
   return (
     <div className="d-flex align-items-center justify-content-center">

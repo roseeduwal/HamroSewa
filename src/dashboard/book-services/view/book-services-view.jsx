@@ -121,7 +121,9 @@ export default function BookServicesView() {
                       <option key={professional.id} value={professional.id}>
                         {`${professional?.user?.firstName} ${
                           professional?.user?.middleName ?? ""
-                        } ${professional?.user?.lastName}`}
+                        } ${professional?.user?.lastName} (${
+                          professional?.category?.categoryName ?? ""
+                        })`}
                       </option>
                     ))}
                   </select>

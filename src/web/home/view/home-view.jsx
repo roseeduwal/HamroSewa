@@ -16,7 +16,7 @@ export default function HomeView() {
                   {`Your Comfort,Our Commitment!'`}
                 </h1>
               </h1>
-              <input
+              {/* <input
                 className="form-control mb-3"
                 type="text"
                 placeholder="Search"
@@ -38,7 +38,7 @@ export default function HomeView() {
                     Pest Control
                   </p>
                 </a>
-              </div>
+              </div> */}
             </div>
           </div>
           <div className="col-lg-6">

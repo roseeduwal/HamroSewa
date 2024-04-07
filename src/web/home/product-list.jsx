@@ -15,16 +15,29 @@ export default function ProductList({ id, serviceName, data, home }) {
 
       <div className="container-fluid mt-3">
         <div className="row mt-4">
-          {data?.map((data, index) => (
-            <ProductCard
-              key={index}
-              description={data.productDescription}
-              image={data.productImageUrl}
-              name={data.productName}
-              price={data.productPrice}
-              home={home}
-            />
-          ))}
+          {home
+            ? data
+                ?.slice(0, 4)
+                ?.map((data, index) => (
+                  <ProductCard
+                    key={index}
+                    description={data.productDescription}
+                    image={data.productImageUrl}
+                    name={data.productName}
+                    price={data.productPrice}
+                    home={home}
+                  />
+                ))
+            : data?.map((data, index) => (
+                <ProductCard
+                  key={index}
+                  description={data.productDescription}
+                  image={data.productImageUrl}
+                  name={data.productName}
+                  price={data.productPrice}
+                  home={home}
+                />
+              ))}
         </div>
       </div>
     </>
