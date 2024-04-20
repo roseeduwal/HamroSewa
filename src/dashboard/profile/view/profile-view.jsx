@@ -103,7 +103,7 @@ export default function ProfileView() {
             <CircularLoader />
           </div>
         ) : (
-          <label htmlFor="profileImage">
+          <label className="p-4" htmlFor="profileImage">
             <img
               src={
                 user.profileImageUrl ??
@@ -112,12 +112,18 @@ export default function ProfileView() {
               style={{
                 height: "100px",
                 width: "100px",
-                marginRight: "20px",
+                marginLeft: "13px",
                 cursor: "pointer",
               }}
               className="rounded-circle border"
               alt="Userphoto"
             />
+            <div
+              className="bg-primary text-white p-1 mt-2 rounded"
+              style={{ cursor: "pointer" }}
+            >
+              Change Image
+            </div>
           </label>
         )}
         <input onChange={uploadImage} type="file" id="profileImage" hidden />
@@ -127,7 +133,7 @@ export default function ProfileView() {
         </div>
       </div>
       <div className="row">
-        <div className="col-6 mt-4 p-2">
+        <div className="col-6 mt-2 p-2" style={{ marginLeft: "100px" }}>
           <form className="p-2" onSubmit={handleSubmit}>
             <p className="text-primary fw-bold fs-4">User Details</p>
             <div className="mb-3">
@@ -141,20 +147,6 @@ export default function ProfileView() {
                 className="form-control"
                 id="firstName"
                 name="firstName"
-                aria-describedby="nameHelp"
-              />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="middleName" className="form-label">
-                Middle Name
-              </label>
-              <input
-                type="middleName"
-                value={userCredentials.middleName}
-                onChange={handleChange}
-                className="form-control"
-                id="middleName"
-                name="middleName"
                 aria-describedby="nameHelp"
               />
             </div>

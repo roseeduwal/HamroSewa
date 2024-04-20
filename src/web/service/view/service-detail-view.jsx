@@ -81,7 +81,7 @@ export default function ServiceDetailView() {
         <div className="row bg-white shadow rounded mt-4">
           <div
             className="p-3 scrollbar"
-            style={{ height: "200px", overflow: "auto" }}
+            style={{ height: "400px", overflow: "auto" }}
           >
             <p className="fw-bold fs-2 m-0">Reviews</p>
             {category?.data?.products.map((product, index) => (

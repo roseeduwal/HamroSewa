@@ -37,6 +37,9 @@ import { DropdownContextProvider } from "./context/dropdown-context.jsx";
 import ForgotPasswordView from "./web/auth/forgot-password/forgot-password-view.jsx";
 import ResetPasswordView from "./web/auth/forgot-password/change-password.jsx";
 
+import "swiper/css";
+import "swiper/css/navigation";
+
 const router = createBrowserRouter([
   {
     path: "/",

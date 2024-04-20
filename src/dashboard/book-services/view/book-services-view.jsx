@@ -71,6 +71,7 @@ export default function BookServicesView() {
             <th scope="col">S.N</th>
             <th scope="col">Service</th>
             <th scope="col">Total Services</th>
+            <th scope="col">Status</th>
             <th scope="col">Payment Mode</th>
             <th>Booking Date</th>
             {user.role === "Admin" && <th>Booked By</th>}
@@ -98,6 +99,7 @@ export default function BookServicesView() {
                 ))}
               </td>
               <td>{booking?.bookingItems.length}</td>
+              <td>{booking?.bookingStatus}</td>
               <td>{booking?.payment?.paymentMode ?? "Cash on Delivery"}</td>
               <td>{booking.bookingDate}</td>
               {user.role === "Admin" && (

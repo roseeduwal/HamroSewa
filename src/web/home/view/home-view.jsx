@@ -54,35 +54,35 @@ export default function HomeView() {
       <p className="text-center mt-3 fs-1 fw-bold">Our Service To Explore</p>
 
       <div className="row mt-4">
-        <div className="col-3 text-center">
+        <div className="col-md-3 text-center mb-3 mb-md-0">
           <img
-            src={
-              "https://firebasestorage.googleapis.com/v0/b/shop-a6a23.appspot.com/o/home%2Fcleaning.png?alt=media&token=5c9dbe4b-8a1a-4324-a350-43e2d8702fdc"
-            }
+            src="https://firebasestorage.googleapis.com/v0/b/shop-a6a23.appspot.com/o/home%2Fcleaning.png?alt=media&token=5c9dbe4b-8a1a-4324-a350-43e2d8702fdc"
+            className="img-fluid"
+            alt="Cleaning"
           />
           <p>Cleaning</p>
         </div>
-        <div className="col-3 text-center">
+        <div className="col-md-3 text-center mb-3 mb-md-0">
           <img
-            src={
-              "https://firebasestorage.googleapis.com/v0/b/shop-a6a23.appspot.com/o/home%2Felectrician.png?alt=media&token=56644391-40b6-4b13-b2b9-5dad8ca2bb95"
-            }
+            src="https://firebasestorage.googleapis.com/v0/b/shop-a6a23.appspot.com/o/home%2Felectrician.png?alt=media&token=56644391-40b6-4b13-b2b9-5dad8ca2bb95"
+            className="img-fluid"
+            alt="Electrician"
           />
           <p>Electrician</p>
         </div>
-        <div className="col-3 text-center">
+        <div className="col-md-3 text-center mb-3 mb-md-0">
           <img
-            src={
-              "https://firebasestorage.googleapis.com/v0/b/shop-a6a23.appspot.com/o/home%2FFlooring.png?alt=media&token=37c7eb2e-9815-4704-98d2-ba1203951f48"
-            }
+            src="https://firebasestorage.googleapis.com/v0/b/shop-a6a23.appspot.com/o/home%2FFlooring.png?alt=media&token=37c7eb2e-9815-4704-98d2-ba1203951f48"
+            className="img-fluid"
+            alt="Flooring"
           />
           <p>Flooring</p>
         </div>
-        <div className="col-3 text-center">
+        <div className="col-md-3 text-center">
           <img
-            src={
-              "https://firebasestorage.googleapis.com/v0/b/shop-a6a23.appspot.com/o/home%2FPlumbing.png?alt=media&token=9e8812b7-f31d-4055-80ac-0e3e4912aae3"
-            }
+            src="https://firebasestorage.googleapis.com/v0/b/shop-a6a23.appspot.com/o/home%2FPlumbing.png?alt=media&token=9e8812b7-f31d-4055-80ac-0e3e4912aae3"
+            className="img-fluid"
+            alt="Plumbing"
           />
           <p>Plumbing</p>
         </div>
@@ -114,12 +114,12 @@ export default function HomeView() {
       </div>
 
       <div className="row mt-4">
-        <div className="col-6 bg-white px-5">
+        <div className="col-md-6 bg-white px-md-5">
           <p className="mt-4 fs-1 fw-bold text-center">Why Hamro Sewa?</p>
 
           <div className="d-flex align-items-center mb-3">
             <div className="w-25 me-2">
-              <img src="/images/why1.png" alt="" />
+              <img src="/images/why1.png" alt="" className="img-fluid" />
             </div>
             <div>
               <p className="fw-bold">Transparent Pricing </p>
@@ -129,28 +129,29 @@ export default function HomeView() {
 
           <div className="d-flex align-items-center mb-3">
             <div className="w-25 me-2">
-              <img src="/images/why2.png" alt="" />
+              <img src="/images/why2.png" alt="" className="img-fluid" />
             </div>
             <div>
-              <p className="fw-bold">Transparent Pricing </p>
-              <p>Check the fixed price before making a reservation.</p>
+              <p className="fw-bold">Quality Services </p>
+              <p>Providing top-notch services with customer satisfaction.</p>
             </div>
           </div>
 
           <div className="d-flex align-items-center mb-3">
             <div className="w-25 me-2">
-              <img src="/images/why3.png" alt="" />
+              <img src="/images/why3.png" alt="" className="img-fluid" />
             </div>
             <div>
-              <p className="fw-bold">Transparent Pricing </p>
-              <p>Check the fixed price before making a reservation.</p>
+              <p className="fw-bold">Professional Staff </p>
+              <p>Experienced and trained professionals for your service.</p>
             </div>
           </div>
         </div>
-        <div className="col-6">
+        <div className="col-md-6">
           <img
-            className="w-100 h-100"
+            className="w-100 h-auto"
             src="https://firebasestorage.googleapis.com/v0/b/shop-a6a23.appspot.com/o/home%2F2.png?alt=media&token=77ee758e-6ca3-48f7-b7db-a3fc4736cd25"
+            alt="Hamro Sewa"
           />
         </div>
       </div>
@@ -232,13 +233,13 @@ export default function HomeView() {
         </button>
       </div>
 
-      <div className="d-flex align-items-center justify-content-around mt-4 ">
-        <div className="border-right box ">
+      <div className="d-flex flex-wrap flex-md-nowrap align-items-center justify-content-around mt-4">
+        <div className="border-right box mb-3 mb-md-0">
           <p className="fw-bold fs-1 text-primary">100+</p>
           <p className="fs-1 text-dark">Bookings</p>
         </div>
 
-        <div className="border-right box2">
+        <div className="border-right box2 mb-3 mb-md-0">
           <p className="fw-bold fs-1 text-primary">30+</p>
           <p className="fs-1 text-dark">Experts</p>
         </div>

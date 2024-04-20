@@ -9,6 +9,7 @@ import { useSnackbar } from "notistack";
 export default function CheckoutView() {
   const [bookingDate, setBookingDate] = useState();
   const [paymentMode, setPaymentMode] = useState("");
+  // const [couponCode, setCouponCode] = useState("");
   const { data: cartItems, isLoading } = useFetchCartItemQuery();
 
   const navigate = useNavigate();
@@ -56,8 +57,7 @@ export default function CheckoutView() {
     });
   }, [addBooking, cartItems, bookingDate, paymentMode]);
 
-  bookingDate;
-
+  // const applyCoupon = useCallback(() => {}, []);
   if (isLoading) return <Loader />;
   return (
     <div
@@ -96,12 +96,34 @@ export default function CheckoutView() {
             </div>
             <p>Rs. {cartItems.data.subTotal}</p>
           </div>
-          <div className="d-flex justify-content-between total">
+          {/* <div className="d-flex justify-content-between align-items-center">
+            <div className="mb-3 ">
+              <input
+                onChange={(e) => setCouponCode(e.target.value)}
+                value={couponCode}
+                placeholder="Coupon code"
+                type="text"
+                name="couponCode"
+                className="form-control"
+                id="exampleInputEmail1"
+                aria-describedby="emailHelp"
+              />
+            </div>
+            <div
+              onClick={applyCoupon}
+              style={{ cursor: "pointer" }}
+              className="bg-primary text-white p-2 rounded"
+            >
+              Apply Coupon
+            </div>
+          </div> */}
+
+          {/* <div className="d-flex justify-content-between total">
             <div className="">
               <p>Total Discount</p>
             </div>
-            <p>- Rs. 0</p>
-          </div>
+            <p>- Rs. {discount}</p>
+          </div> */}
           <div className="d-flex justify-content-between mt-3 ">
             <div className="">
               <p>Grand Total</p>

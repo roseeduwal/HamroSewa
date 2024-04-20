@@ -1,6 +1,6 @@
-export default function ProductCard({ name, price, image }) {
+export default function ProductCard({ name, price, image, css }) {
   return (
-    <div className="col-lg-3">
+    <div className={css}>
       <div className="card border-0 shadow ">
         <img
           className="card-img-top"
