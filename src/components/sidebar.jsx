@@ -67,6 +67,13 @@ export default function Sidebar() {
       icon: <Iconify icon="mdi:tag-outline" />,
       access: ["professional"],
     },
+
+    {
+      name: "Coupon Codes",
+      path: "/dashboard/coupon-codes",
+      icon: <Iconify icon="streamline:discount-percent-coupon-solid" />,
+      access: ["admin"],
+    },
   ];
   return (
     <div className="col-2 p-2 d-flex flex-column">

@@ -21,6 +21,5 @@ export function deleteService(id) {
 }
 
 export function getServiceDetail(id) {
-  "id", id;
   return api.get(`products/${id}`);
 }

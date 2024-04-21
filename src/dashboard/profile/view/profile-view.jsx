@@ -133,7 +133,7 @@ export default function ProfileView() {
         </div>
       </div>
       <div className="row">
-        <div className="col-6 mt-2 p-2" style={{ marginLeft: "100px" }}>
+        <div className="col-6 mt-2 p-2">
           <form className="p-2" onSubmit={handleSubmit}>
             <p className="text-primary fw-bold fs-4">User Details</p>
             <div className="mb-3">

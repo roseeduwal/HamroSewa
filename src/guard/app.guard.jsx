@@ -15,6 +15,7 @@ export default function AppGuard({ children }) {
     [dispatch]
   );
   const onError = useCallback(() => {
+    console.log("here");
     navigate("/");
   }, [navigate]);
   const { isLoading } = useFetchMeQuery(onSuccess, onError);

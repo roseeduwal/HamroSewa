@@ -12,7 +12,7 @@ export const useFetchMeQuery = (onSuccess, onError) => {
   return useQuery("user", fetchMe, {
     onSuccess,
     onError,
-    retry: 1,
+    retry: 0,
     refetchOnWindowFocus: false,
   });
 };

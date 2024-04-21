@@ -5,15 +5,43 @@ import { useFetchCartItemQuery } from "../../../hooks/useCartItem";
 import { useBookingMutation } from "../../../hooks/useBooking";
 import { useNavigate } from "react-router-dom";
 import { useSnackbar } from "notistack";
+import { useCheckCouponCodeMutation } from "../../../hooks/useCouponCode";
 
 export default function CheckoutView() {
   const [bookingDate, setBookingDate] = useState();
+  const [discount, setDiscount] = useState(0);
   const [paymentMode, setPaymentMode] = useState("");
-  // const [couponCode, setCouponCode] = useState("");
-  const { data: cartItems, isLoading } = useFetchCartItemQuery();
+  const [couponCode, setCouponCode] = useState("");
 
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
+
+  const { data: cartItems, isLoading } = useFetchCartItemQuery();
+
+  const onCheckSuccess = useCallback(
+    (data) => {
+      const discountPrice = +data.data.discountPrice;
+      setDiscount(discountPrice);
+      enqueueSnackbar("Discount successful", { variant: "success" });
+    },
+    [enqueueSnackbar]
+  );
+
+  const onCheckError = useCallback(
+    (error) => {
+      error;
+      enqueueSnackbar(
+        error?.response?.data?.message ?? "Something went wrong",
+        { variant: "error" }
+      );
+    },
+    [enqueueSnackbar]
+  );
+
+  const { mutate: checkCouponCodeMutation } = useCheckCouponCodeMutation(
+    onCheckSuccess,
+    onCheckError
+  );
 
   const onSuccess = useCallback(
     (data) => {
@@ -50,14 +78,16 @@ export default function CheckoutView() {
       productId: item.product.id,
     }));
     addBooking({
-      subTotal: cartItems.data.subTotal,
+      subTotal: cartItems.data.subTotal - discount,
       bookingDate,
       bookingItems,
       paymentMode,
     });
-  }, [addBooking, cartItems, bookingDate, paymentMode]);
+  }, [addBooking, cartItems, bookingDate, paymentMode, discount]);
 
-  // const applyCoupon = useCallback(() => {}, []);
+  const applyCoupon = useCallback(() => {
+    checkCouponCodeMutation(couponCode);
+  }, [checkCouponCodeMutation, couponCode]);
   if (isLoading) return <Loader />;
   return (
     <div
@@ -96,10 +126,10 @@ export default function CheckoutView() {
             </div>
             <p>Rs. {cartItems.data.subTotal}</p>
           </div>
-          {/* <div className="d-flex justify-content-between align-items-center">
+          <div className="d-flex justify-content-between align-items-center">
             <div className="mb-3 ">
               <input
-                onChange={(e) => setCouponCode(e.target.value)}
+                onChange={(e) => setCouponCode(e.target.value.toUpperCase())}
                 value={couponCode}
                 placeholder="Coupon code"
                 type="text"
@@ -116,19 +146,19 @@ export default function CheckoutView() {
             >
               Apply Coupon
             </div>
-          </div> */}
+          </div>
 
-          {/* <div className="d-flex justify-content-between total">
+          <div className="d-flex justify-content-between total">
             <div className="">
               <p>Total Discount</p>
             </div>
             <p>- Rs. {discount}</p>
-          </div> */}
+          </div>
           <div className="d-flex justify-content-between mt-3 ">
             <div className="">
               <p>Grand Total</p>
             </div>
-            <p>Rs. {cartItems.data.subTotal}</p>
+            <p>Rs. {cartItems.data.subTotal - discount}</p>
           </div>
         </div>
 

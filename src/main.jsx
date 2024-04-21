@@ -39,6 +39,9 @@ import ResetPasswordView from "./web/auth/forgot-password/change-password.jsx";
 
 import "swiper/css";
 import "swiper/css/navigation";
+import CouponCodeView from "./dashboard/coupon-codes/view/coupon-code-view.jsx";
+import EditCoupon from "./dashboard/coupon-codes/edit-coupon.jsx";
+import AddCoupon from "./dashboard/coupon-codes/add-coupon.jsx";
 
 const router = createBrowserRouter([
   {
@@ -154,6 +157,18 @@ const router = createBrowserRouter([
           {
             path: "assigned",
             element: <AssignedView />,
+          },
+          {
+            path: "coupon-codes",
+            element: <CouponCodeView />,
+          },
+          {
+            path: "coupon-codes/edit/:id",
+            element: <EditCoupon />,
+          },
+          {
+            path: "coupon-codes/add-coupon",
+            element: <AddCoupon />,
           },
         ],
       },

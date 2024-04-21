@@ -20,7 +20,12 @@ export default function ServiceDetailView() {
             <p className="mt-4 fw-bold fs-2">{category.data.categoryName}</p>
             <div className="d-flex align-items-center">
               <i className="ph ph-star"></i>
-              <p className="fs-4 mb-0">
+              <p className="fs-4 d-flex mb-0">
+                <Iconify
+                  marginRight="5px"
+                  padding="0"
+                  icon="fluent-emoji-flat:star"
+                />{" "}
                 {category?.data?.rating}({category.data.bookings} Bookings)
               </p>
             </div>
