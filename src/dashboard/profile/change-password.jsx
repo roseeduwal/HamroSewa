@@ -38,7 +38,9 @@ export default function ChangePassword() {
     (error) => {
       error;
       enqueueSnackbar(
-        error?.response?.data?.message ?? "Something went wrong",
+        Array.isArray(error?.response?.data?.message)
+          ? error?.response?.data?.message[0]
+          : error?.response?.data?.message,
         { variant: "error" }
       );
     },
@@ -62,9 +64,13 @@ export default function ChangePassword() {
   const handleSubmit = useCallback(
     (e) => {
       e.preventDefault();
+      if (passwordInfo.newPassword !== passwordInfo.confirmPassword) {
+        enqueueSnackbar("Password do not match", { variant: "error" });
+        return;
+      }
       updatePassword(passwordInfo);
     },
-    [updatePassword, passwordInfo]
+    [updatePassword, enqueueSnackbar, passwordInfo]
   );
   return (
     <div className="col-6 divpassword mt-4 p-2">

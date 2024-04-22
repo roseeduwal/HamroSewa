@@ -62,6 +62,7 @@ export default function AssignedView() {
         <tbody>
           {assignedBookings?.data.map((assignedBooking, index) => (
             <TableRow
+              hideDelete
               hideAction
               id={assignedBooking.id}
               key={index}
