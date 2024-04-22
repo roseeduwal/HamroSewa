@@ -7,3 +7,7 @@ export const confirmPayment = (pidx) => {
 export const fetchPayment = () => {
   return api.get("payments");
 };
+
+export const deletePayment = (id) => {
+  return api.delete(`payments/${id}`);
+};

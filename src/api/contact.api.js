@@ -7,3 +7,7 @@ export const createContact = (contact) => {
 export const fetchContacts = () => {
   return api.get("contacts");
 };
+
+export const deleteMessage = (id) => {
+  return api.delete(`contacts/${id}`);
+};

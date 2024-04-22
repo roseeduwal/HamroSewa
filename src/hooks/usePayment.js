@@ -1,5 +1,9 @@
 import { useMutation, useQuery } from "react-query";
-import { confirmPayment, fetchPayment } from "../api/payment.api";
+import {
+  confirmPayment,
+  deletePayment,
+  fetchPayment,
+} from "../api/payment.api";
 
 export const useConfirmPaymentMutation = (onSuccess, onError) => {
   return useMutation({ mutationFn: confirmPayment, onError, onSuccess });
@@ -10,4 +14,8 @@ export const useFetchPaymentQuery = () => {
     refetchOnWindowFocus: false,
     retry: 1,
   });
+};
+
+export const useDeletePaymentMutation = (onSuccess, onError) => {
+  return useMutation({ mutationFn: deletePayment, onError, onSuccess });
 };
