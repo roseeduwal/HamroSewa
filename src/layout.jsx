@@ -2,10 +2,9 @@ import Footer from "./components/footer";
 import Navbar from "./components/navbar";
 import { useAuthContext } from "./hooks/useAuthContext";
 import { useCallback } from "react";
-import { useFetchPaymentQuery } from "./hooks/usePayment";
 // import { useAuthContext } from "./hooks/useAuthContext";
 // import { useCallback } from "react";
-// import { useFetchMeQuery } from "./hooks/useUser";
+import { useFetchMeQuery } from "./hooks/useUser";
 import ScreenSplash from "./components/splash-loader";
 // import { useNavigate } from "react-router-dom";
 
@@ -23,7 +22,7 @@ export default function AppLayout({ children }) {
   const onError = useCallback(() => {
     // navigate("/");
   }, []);
-  const { isLoading } = useFetchPaymentQuery(onSuccess, onError);
+  const { isLoading } = useFetchMeQuery(onSuccess, onError);
   if (isLoading)
     return (
       <div>
