@@ -34,6 +34,7 @@ export default function RegisterView() {
     },
     [enqueueSnackbar, navigate]
   );
+
   const onError = useCallback(
     (data) => {
       if (data?.response?.status === 400) {
@@ -58,8 +59,8 @@ export default function RegisterView() {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    setUserCredentials((preVal) => ({
-      ...preVal,
+    setUserCredentials((prevVal) => ({
+      ...prevVal,
       [name]: value,
     }));
   };
@@ -77,44 +78,39 @@ export default function RegisterView() {
     },
     [signUpMutation, userType, enqueueSnackbar, userCredentials]
   );
+
   return (
-    <>
+    <div className="container">
       <div className="row mt-4">
-        <div className="col-6 d-flex align-items-center justify-content-center">
+        <div className="col-lg-6 d-flex align-items-center justify-content-center">
           <img
             src={
               userType === "User"
                 ? "https://firebasestorage.googleapis.com/v0/b/shop-a6a23.appspot.com/o/register%2Flogin.png?alt=media&token=6e98f461-14bd-4e3f-b5e0-09e7a65e12d8"
                 : "https://firebasestorage.googleapis.com/v0/b/shop-a6a23.appspot.com/o/register%2Fprofessionals.png?alt=media&token=3adec4f7-f8c4-47a6-88bb-54636ac9b255"
             }
-            style={{
-              height: "500px",
-              width: "500px",
-              flexGrow: "1",
-              objectFit: "contain",
-            }}
+            style={{ height: "auto", maxWidth: "100%" }}
+            alt="User Type Image"
           />
         </div>
-        <div className="col-6 ">
+        <div className="col-lg-6">
           <h5 className="text-center">Select User Type</h5>
-          <div className="d-flex p-2 justify-content-center  align-items-center">
+          <div className="d-flex p-2 justify-content-center align-items-center">
             <div
               onClick={() => setUserType("Professional")}
-              style={{ cursor: "pointer" }}
-              className={`cursor-pointer m-2 user-type ${
+              className={`m-2 user-type ${
                 userType === "Professional"
                   ? "bg-primary text-white"
                   : "bg-white"
-              }  px-5 py-3 rounded`}
+              }  px-5 py-3 rounded cursor-pointer`}
             >
               Professional
             </div>
             <div
               onClick={() => setUserType("User")}
-              style={{ cursor: "pointer" }}
-              className={`cursor-pointer user-type ${
+              className={`user-type ${
                 userType === "User" ? "bg-primary text-white" : "bg-white"
-              }  px-5 py-3 rounded`}
+              }  px-5 py-3 rounded cursor-pointer`}
             >
               User
             </div>
@@ -138,21 +134,6 @@ export default function RegisterView() {
                 aria-describedby="nameHelp"
               />
             </div>
-
-            {/* <div className="mb-3">
-              <label htmlFor="middleName" className="form-label">
-                Middle Name
-              </label>
-              <input
-                type="middleName"
-                value={userCredentials.middleName}
-                onChange={handleChange}
-                className="form-control"
-                id="middleName"
-                name="middleName"
-                aria-describedby="nameHelp"
-              />
-            </div> */}
 
             <div className="mb-3">
               <label htmlFor="lastName" className="form-label">
@@ -213,6 +194,7 @@ export default function RegisterView() {
                 aria-describedby="addressHelp"
               />
             </div>
+
             <label htmlFor="password" className="form-label">
               Password*
             </label>
@@ -226,7 +208,7 @@ export default function RegisterView() {
                 name="password"
               />
               <div
-                onClick={() => setViewPassword((preVal) => !preVal)}
+                onClick={() => setViewPassword((prevVal) => !prevVal)}
                 style={{ cursor: "pointer" }}
                 className="input-group-prepend"
               >
@@ -245,7 +227,7 @@ export default function RegisterView() {
 
             {userType === "Professional" && (
               <div className="mb-3">
-                <label htmlFor="exampleInputnumber1" className="form-label">
+                <label htmlFor="profession" className="form-label">
                   Services
                 </label>
                 <select
@@ -280,6 +262,6 @@ export default function RegisterView() {
           </form>
         </div>
       </div>
-    </>
+    </div>
   );
 }

@@ -11,12 +11,14 @@ export default function ServiceDetailView() {
   id;
   const { data: category, isLoading } = useFetchCategoryDetailQuery(id);
   const { data: cartItems } = useFetchCartItemQuery();
+
   if (isLoading) return <Loader />;
+
   return (
     <main>
       <div className="container-fluid">
         <div className="row mt-4 d-flex justify-content-between">
-          <div className="col-3">
+          <div className="col-md-3">
             <p className="mt-4 fw-bold fs-2">{category.data.categoryName}</p>
             <div className="d-flex align-items-center">
               <i className="ph ph-star"></i>
@@ -35,7 +37,7 @@ export default function ServiceDetailView() {
 
       <div className="container-fluid">
         <div className="row ">
-          <div className="col-8 ">
+          <div className="col-lg-8 col-md-12">
             <div className="bg-white shadow rounded mt-3 px-4 py-2">
               <p className="fw-bold fs-3 mt-3">Services</p>
 
@@ -52,11 +54,11 @@ export default function ServiceDetailView() {
             </div>
           </div>
 
-          <div className=" col-4 mt-3 cartcolumn  ">
+          <div className="col-lg-4 col-md-12 mt-3 cartcolumn">
             <CartDetails cartItems={cartItems} />
 
             <div className="row bg-white shadow rounded mt-4">
-              <div className=" d-flex align-items-center cartdown">
+              <div className="col-12 d-flex align-items-center cartdown">
                 <div className="">
                   <Iconify icon="bitcoin-icons:verify-outline" width={40} />
                 </div>
@@ -64,7 +66,7 @@ export default function ServiceDetailView() {
                   <p className="fw-bold m-0">Verified Professionals</p>
                 </div>
               </div>
-              <div className="d-flex align-items-center cartdown">
+              <div className="col-12 d-flex align-items-center cartdown">
                 <div className="">
                   <Iconify icon="bitcoin-icons:verify-outline" width={40} />
                 </div>
@@ -72,7 +74,7 @@ export default function ServiceDetailView() {
                   <p className="fw-bold m-0">Safe Chemicals</p>
                 </div>
               </div>
-              <div className="d-flex align-items-center cartdown">
+              <div className="col-12 d-flex align-items-center cartdown">
                 <div className="">
                   <Iconify icon="bitcoin-icons:verify-outline" width={40} />
                 </div>
@@ -85,7 +87,7 @@ export default function ServiceDetailView() {
         </div>
         <div className="row bg-white shadow rounded mt-4">
           <div
-            className="p-3 scrollbar"
+            className="col-12 p-3 scrollbar"
             style={{ height: "400px", overflow: "auto" }}
           >
             <p className="fw-bold fs-2 m-0">Reviews</p>

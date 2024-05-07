@@ -54,49 +54,46 @@ export default function ContactUsView() {
     },
     [createContact, messageDetail]
   );
+
   return (
     <main>
-      <div className="container-fluid p-4 contactdiv ">
-        <div className="d-flex align-items-center justify-content-around">
-          <div className="col-5">
+      <div className="container-fluid p-4 contactdiv">
+        <div className="row">
+          <div className="col-md-6">
             <p className="fw-bold fs-2 mt-3">Contact Us</p>
             <p className="mt-2">
-              We’re here to help.Fill out the form below and we’ll get back to
-              you as soon as possible.{" "}
+              We’re here to help. Fill out the form below and we’ll get back to
+              you as soon as possible.
             </p>
             <form onSubmit={handleSubmit}>
               <div className="mb-3">
-                <label htmlFor="exampleInputEmail1" className="form-label">
+                <label htmlFor="fullName" className="form-label">
                   Full Name
                 </label>
                 <input
                   onChange={handleChange}
                   value={messageDetail.fullName}
                   name="fullName"
-                  type="fullname"
+                  type="text"
                   className="form-control"
-                  id="exampleInputEmail1"
-                  aria-describedby="emailHelp"
+                  id="fullName"
                 />
               </div>
               <div className="mb-3">
-                <label htmlFor="exampleInputPassword1" className="form-label">
+                <label htmlFor="email" className="form-label">
                   Email
                 </label>
                 <input
                   onChange={handleChange}
                   value={messageDetail.email}
                   name="email"
-                  type="Email"
+                  type="email"
                   className="form-control"
-                  id="exampleInputPassword1"
+                  id="email"
                 />
               </div>
               <div className="mb-3">
-                <label
-                  htmlFor="exampleFormControlTextarea1"
-                  className="form-label"
-                >
+                <label htmlFor="message" className="form-label">
                   Message
                 </label>
                 <textarea
@@ -104,7 +101,7 @@ export default function ContactUsView() {
                   value={messageDetail.message}
                   name="message"
                   className="form-control"
-                  id="exampleFormControlTextarea1"
+                  id="message"
                   rows="4"
                 ></textarea>
               </div>
@@ -117,29 +114,30 @@ export default function ContactUsView() {
               </LoadingButton>
             </form>
           </div>
-
-          <div className="col-5">
+          <div className="col-md-6">
             <p className="fw-bold fs-4 mt-4">Contact Information</p>
             <div>Reach out to us directly.</div>
             <div className="d-flex align-items-center">
               <Iconify icon="ic:outline-email" />
-              <div className="">Email</div>
+              <div className="ms-2">Email</div>
             </div>
             <div>Hamrosewa@gmail.com</div>
             <div className="d-flex align-items-center">
               <Iconify icon="ph:phone" />
-              <div className="">Phone</div>
+              <div className="ms-2">Phone</div>
             </div>
             <p>9840580533</p>
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14136.443328399193!2d85.31814686192061!3d27.652042467839227!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb1763afe90a91%3A0x24e78f10fcea8163!2sSatdobato%2C%20Lalitpur%2044700!5e0!3m2!1sen!2snp!4v1711376737950!5m2!1sen!2snp"
-              width="600"
-              height="450"
-              style={{ border: 0 }}
-              allowfullscreen=""
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            ></iframe>
+            <div className="mt-3">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14136.443328399193!2d85.31814686192061!3d27.652042467839227!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb1763afe90a91%3A0x24e78f10fcea8163!2sSatdobato%2C%20Lalitpur%2044700!5e0!3m2!1sen!2snp!4v1711376737950!5m2!1sen!2snp"
+                width="100%"
+                height="300"
+                style={{ border: 0 }}
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
           </div>
         </div>
       </div>
